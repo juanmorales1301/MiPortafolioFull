@@ -1,5 +1,3 @@
-¡Claro! Aquí tienes un **README.md** y un **.gitignore** para tu aplicación.
-
 ### **README.md**
 
 Este archivo documenta cómo utilizar tu aplicación, los pasos para instalarla, ejecutarla y probarla.

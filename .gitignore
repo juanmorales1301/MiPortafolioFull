@@ -1,5 +1,3 @@
-Este archivo define qué archivos y carpetas deben ser ignorados por Git (como el archivo `.env` que contiene variables sensibles, `node_modules`, entre otros).
-
 ```gitignore
 # Node modules
 node_modules/

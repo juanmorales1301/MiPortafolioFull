@@ -28,7 +28,7 @@ Esta es una API REST para la gestión de usuarios, que utiliza autenticación co
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
+git clone https://github.com/juanmorales1301/ProyectoNodeJS.git
 ```
 
 2. Instalar las dependencias:

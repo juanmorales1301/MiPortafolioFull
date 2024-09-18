@@ -1,11 +1,11 @@
 ### **README.md**
 
-Este archivo documenta cómo utilizar tu aplicación, los pasos para instalarla, ejecutarla y probarla.
+Este archivo documenta cómo utilizar la aplicación, los pasos para instalarla, ejecutarla y probarla.
 
 ```markdown
 # API REST de Usuarios con Autenticación JWT
 
-Esta es una API REST para la gestión de usuarios, que utiliza autenticación con **JWT (JSON Web Token)** y está desarrollada en **Node.js** utilizando **Express**. La API está documentada con **Swagger** y utiliza **Jest** para pruebas unitarias.
+Se presenta una API REST para la gestión de usuarios, que utiliza autenticación con **JWT (JSON Web Token)** y está desarrollada en **Node.js** utilizando **Express**. La API está documentada con **Swagger** y se utilizan **Jest** para pruebas unitarias.
 
 ## Características
 
@@ -57,7 +57,7 @@ npm start
 POST /usuario/autentificar
 ```
 
-Autenticar al usuario y devolver un token JWT.
+Autentica al usuario y devuelve un token JWT.
 
 #### Request Body:
 
@@ -110,7 +110,7 @@ Retorna una lista de todos los usuarios registrados.
 POST /usuario
 ```
 
-Crear un nuevo usuario.
+Crea un nuevo usuario.
 
 #### Request Body:
 
@@ -143,7 +143,7 @@ http://localhost:6000/api-docs
 
 ## Pruebas unitarias
 
-Para ejecutar las pruebas unitarias, utiliza el siguiente comando:
+Para ejecutar las pruebas unitarias, se debe utilizar el siguiente comando:
 
 ```bash
 npm test
@@ -161,5 +161,5 @@ Las pruebas están escritas utilizando **Jest** y **Supertest**.
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT - consultar el archivo [LICENSE](LICENSE) para más detalles.
 ```

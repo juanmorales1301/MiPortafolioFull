@@ -17,6 +17,8 @@ const options = {
 
 const swaggerSpec = swaggerJsdoc(options);
 
+app.use(express.json()); // Maneja los formatos JSON para que sean parseables
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Configura ruta para publicar documentación de EndPoints
 
 

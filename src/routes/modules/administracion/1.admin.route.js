@@ -1,5 +1,6 @@
 const express = require('express');
 const routesUsuario = require('./usuario.route');
+const routesContacto = require('./usuario.route');
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ const router = express.Router();
 
 // Usa todas las rutas de usuario bajo el prefijo /usuario
 router.use('/usuario', routesUsuario);
+router.use('/contacto', routesContacto);
 
 module.exports = router;

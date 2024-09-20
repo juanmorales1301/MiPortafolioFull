@@ -27,6 +27,15 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
 }));
 
+app.get('/', (req, res) => {
+  res.send('Hola, este es mi proyecto Node.js desplegado en Vercel.');
+});
+
+// Definir una ruta adicional para "/about"
+app.get('/about', (req, res) => {
+  res.send('Esta es la página "Acerca de" de mi aplicación Node.js.');
+});
+
 //Inicializando rutas
 app.use(routes);
 

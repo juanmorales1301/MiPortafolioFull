@@ -26,3 +26,4 @@ coverage/
 # Archivos generados por el sistema operativo
 Thumbs.db
 Desktop.ini
+.vercel

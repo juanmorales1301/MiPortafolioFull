@@ -27,6 +27,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
 }));
 
+app.options('*', cors());
+
 app.get('/', (req, res) => {
   res.send('Hola, este es mi proyecto Node.js desplegado en Vercel.');
 });

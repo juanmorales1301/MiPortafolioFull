@@ -32,7 +32,7 @@ app.use(cors({
 app.options('*', cors());
 
 app.get('/', (req, res) => {
-  res.send('Hola, este es mi proyecto Node.js desplegado en Vercel.');
+  res.redirect('/api-docs');
 });
 
 // Definir una ruta adicional para "/about"

@@ -8,8 +8,9 @@ const swaggerDocument = {
     description: "Documentación API practica TalentoTech"
   },
   servers: [
-    {
-      url: `http://${process.env.DOMAIN}:${process.env.PORT}`
+    {      
+      url: "/",// URL relativa para que funcione dinámicamente según el entorno
+      description: "Servidor API (dinámico)"
     }
   ],
   components: {

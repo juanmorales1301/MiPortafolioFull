@@ -19,10 +19,7 @@ const options = {
 // Generar la especificación Swagger a partir de las anotaciones en el código
 const swaggerSpec = swaggerJsdoc(options);
 
-// Sirviendo Swagger UI desde el directorio de distribución
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Sirve archivos estáticos de Swagger UI desde 'node_modules'
 app.use('/swagger-static', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
 
 // Configurar CORS para permitir todos los orígenes y encabezados

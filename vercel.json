@@ -11,6 +11,16 @@
         "src": "/(.*)",
         "dest": "/index.js"
       }
+    ],
+    "rewrites": [
+      {
+        "source": "/swagger-ui-bundle.js",
+        "destination": "/node_modules/swagger-ui-dist/swagger-ui-bundle.js"
+      },
+      {
+        "source": "/swagger-ui-standalone-preset.js",
+        "destination": "/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js"
+      }
     ]
   }
   

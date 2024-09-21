@@ -20,6 +20,7 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/swagger-static', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
 
 // Configurar CORS para permitir todos los orígenes y encabezados
 app.use(cors({

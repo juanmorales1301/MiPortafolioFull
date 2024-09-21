@@ -8,14 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/swagger/swagger-ui-bundle.js",
-      "dest": "/public/swagger/swagger-ui-bundle.js"
-    },
-    {
-      "src": "/swagger/swagger-ui-standalone-preset.js",
-      "dest": "/public/swagger/swagger-ui-standalone-preset.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.js"
     }

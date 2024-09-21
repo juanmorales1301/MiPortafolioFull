@@ -19,7 +19,7 @@ const options = {
 // Generar la especificación Swagger a partir de las anotaciones en el código
 const swaggerSpec = swaggerJsdoc(options);
 
-app.get('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Configurar CORS para permitir todos los orígenes y encabezados
 app.use(cors({
@@ -35,5 +35,4 @@ app.use(routes);
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://${domain}:${port}`);
   console.log(`Documentación Swagger disponible en http://${domain}:${port}/api-docs`);
-  console.log(`Archivos estáticos de Swagger servidos en http://${domain}:${port}/swagger-static/`);
 });

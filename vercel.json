@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/swagger-static/(.*)",
+      "src": "/(.*)",
       "dest": "/node_modules/swagger-ui-dist/$1"
     },
     {

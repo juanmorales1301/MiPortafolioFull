@@ -167,7 +167,7 @@ const ControllerUsuario = {
         try {
             const { id } = req.params;
 
-            const usuarioEliminado = await Usuario.findByIdAndDelete(id);
+             const usuarioEliminado = await Usuario.findByIdAndDelete(id);
             if (!usuarioEliminado) {
                 return res.status(404).json({ mensaje: 'Usuario no encontrado' });
             }

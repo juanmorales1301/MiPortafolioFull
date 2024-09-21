@@ -15,10 +15,14 @@ const options = {
   apis: ['./src/routes/*.js'],
 };
 
-const swaggerSpec = swaggerJsdoc(options);
 
 app.use(express.json()); // Maneja los formatos JSON para que sean parseables
+app.use(express.static("/api-docs"));
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = swaggerJsdoc(options);
+
+routes.use('/api-docs', swaggerUi.serve);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Configura ruta para publicar documentación de EndPoints
 
 

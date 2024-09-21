@@ -13,7 +13,7 @@ const domain = process.env.DOMAIN || 'localhost';
 // Opciones para Swagger JSdoc
 const options = {
   definition: swaggerDocument,
-  apis: ['./src/routes/modules/administracion/*.js'],  // Archivos con anotaciones de swagger
+  apis: ['./src/routes/**/*.js'],  // Archivos con anotaciones de swagger
 };
 
 // Generar la especificación Swagger a partir de las anotaciones en el código

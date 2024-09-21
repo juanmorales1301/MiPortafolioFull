@@ -23,7 +23,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = swaggerJsdoc(options);
 
 routes.use('/api-docs', swaggerUi.serve);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Configura ruta para publicar documentación de EndPoints
+app.get('/api-docs', swaggerUi.setup(swaggerSpec)); // Configura ruta para publicar documentación de EndPoints
 
 
 // Configura CORS para permitir todos los orígenes y encabezados

@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/node_modules/swagger-ui-dist/$1"
+      "src": "/node_modules/swagger-ui-dist/(.*)",
+      "dest": "/"
     },
     {
       "src": "/(.*)",

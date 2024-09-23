@@ -18,6 +18,10 @@ const options = {
   apis: ['./src/routes/**/*.js'],  // Archivos con anotaciones de swagger
 };
 
+app.get('/', (req, resp)=>{
+  resp.send('Bienvenido a mi API');
+})
+
 // Generar la especificación Swagger a partir de las anotaciones en el código
 const swaggerSpec = swaggerJsdoc(options);
 

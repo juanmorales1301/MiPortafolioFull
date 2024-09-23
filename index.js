@@ -10,6 +10,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const domain = process.env.DOMAIN || 'localhost';
 
+app.use(express.json());
+
 // Opciones para Swagger JSdoc
 const options = {
   definition: swaggerDocument,

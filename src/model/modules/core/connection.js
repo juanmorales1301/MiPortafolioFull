@@ -54,11 +54,14 @@ const getConnection = async () => {
       release: () => mongoClient.close()
     };
   } else if (dbType === 'mongoose') {
-    const mongooseConnection = await connectToMongoose();
-    return {
-      connection: mongooseConnection,  // Devuelve la conexión pura de Mongoose para usar modelos
-      close: () => mongooseConnection.connection.close()  // Método para cerrar la conexión de Mongoose
-    };
+    await connectToMongoose().then((mongooseConnection)=>{
+      return {
+        connection: mongooseConnection,  // Devuelve la conexión pura de Mongoose para usar modelos
+        close: () => mongooseConnection.connection.close()  // Método para cerrar la conexión de Mongoose
+      };
+    }).catch((err)=>{
+      throw err;
+    });
   } else {
     throw new Error('Tipo de base de datos no soportada');
   }

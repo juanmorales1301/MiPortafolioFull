@@ -44,8 +44,6 @@ const mongodbConfig = {
 };
 
 // Configuración para Mongoose
-const mongooseUri = process.env.MONGOOSE_URI;
-
 const mysqlPool = mysql.createPool(mysqlConfig).promise();
 const postgresPool = new Pool(postgresConfig);
 let mongoClient;
@@ -62,10 +60,7 @@ const connectToMongoDB = async () => {
 // Conexión a MongoDB usando Mongoose
 const connectToMongoose = async () => {
   try {
-    await mongoose.connect(mongooseUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('MongoDB conectado con Mongoose');
   } catch (error) {
     console.error('Error conectando con MongoDB usando Mongoose:', error);

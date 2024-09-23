@@ -1,4 +1,6 @@
 const Contacto = require('../../../model/modules/contacto/contacto.model.js');
+const Usuario = require('../../../model/modules/administracion/usuario.model.js');
+const conexionModel = require('../../../model/modules/core/connection.js');
 
 const ContactoControl = {
     crearContacto: async (req, res, next) => {
@@ -14,6 +16,9 @@ const ContactoControl = {
             const ipCliente = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             const fechaContacto = new Date();
 
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
+
             // Crear nuevo contacto
             const nuevoContacto = new Contacto({
                 nombre,
@@ -24,9 +29,32 @@ const ContactoControl = {
                 fechaContacto,
             });
 
+            // Crear nuevo usuario
+            const nuevoUsuario = new Usuario({
+                nombre,
+                apellido: '-',
+                tipoIdentificacion: 'Cédula de Ciudadanía',
+                identificacion: '0',
+                direccion: 'NA',
+                celular,
+                telefono: celular,
+                correoElectronico: correo,
+                contrasena: correo,
+                mensaje,
+                ip: ipCliente,
+                fechaContacto,
+            });
+
             // Guardar el contacto en la base de datos
-            await nuevoContacto.save();
-            return res.status(201).json({ mensaje: 'Contacto creado exitosamente', contacto: nuevoContacto });
+            await nuevoContacto.save().then(async (result) => {
+                await nuevoUsuario.save().then((us) => {
+                    return res.status(201).json({ mensaje: 'Contacto creado exitosamente', contacto: result, usuario: us });
+                }).catch((errUs) => {
+                    return res.status(206).json({ mensaje: 'Error al crear contacto', contacto: result, error: errUs });
+                })
+            }).catch((err) => {
+                return res.status(206).json({ mensaje: 'Error al crear contacto', error: err });
+            });
         } catch (error) {
             console.log(error);
             return res.status(500).json({ mensaje: 'Error al crear el contacto', error });

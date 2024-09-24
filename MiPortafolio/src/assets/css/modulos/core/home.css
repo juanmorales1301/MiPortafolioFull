@@ -1,0 +1,115 @@
+@media (max-width: 1026px) {
+    .perfil_profesional .bloque_perfil {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+@media (max-width: 1350px) {
+    .perfil_profesional .content_perfil {
+        flex-wrap: wrap !important;
+        max-width: 80%;
+    }
+
+    .contenido_bloque_perfil {
+        flex-wrap: wrap !important;
+    }
+}
+
+.perfil_profesional {
+    width: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    padding: 3rem 0rem 5rem 0rem;
+}
+
+.perfil_profesional .titulo_perfil {
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    padding-bottom: 5vh;
+    width: 100%;
+}
+
+.perfil_profesional .content_perfil {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 5vw;
+}
+
+.contenido_bloque_perfil {
+    max-width: 900px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.contenido_bloque_perfil {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+}
+
+.perfil_profesional .bloque_perfil {
+    width: 250px;
+    background-color: white;
+    box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 18px;
+    padding-top: 30px;
+    transition: 200ms;
+    cursor: pointer;
+    height: 160px;
+    display: flex;
+    align-content: flex-start;
+}
+
+.perfil_profesional .bloque_perfil:hover {
+    transform: translateY(-20px);
+    transition: all ease 200ms;
+}
+
+.perfil_profesional .bloque_perfil p {
+    color: var(--primary-color-ligth);
+}
+
+.perfil_profesional .titulo_bloque {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.perfil_profesional .titulo_bloque>* {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: left;
+    display: inline;
+}
+
+.perfil_profesional .titulo_bloque i, .perfil_profesional .titulo_bloque svg {
+    width: 40px;
+    font-size: 40px;
+    padding: 10px;
+}
+
+.perfil_profesional .cont-image {
+    display: flex;
+    width: auto;
+}
+
+.perfil_profesional img {
+    width: 300px;
+    background-color: white;
+    border-radius: 50%;    
+    box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.25);
+}
+
+.perfil_profesional img:hover {
+    transform: scale(1.1, 1.1);
+    transition: all ease 200ms;
+}

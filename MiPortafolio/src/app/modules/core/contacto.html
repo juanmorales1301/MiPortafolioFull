@@ -1,0 +1,47 @@
+<head>
+    <link rel="stylesheet" href="/src/assets/css/modulos/core/contacto.css">
+</head>
+
+<section class="content-contacto">
+
+    <div class="contacto">
+        <article class="data-info">
+            <div class="data-contacto">
+                <div class="titulo-contacto">
+                    <i class="fa-solid fa-address-card"></i>
+                    Contactame
+                </div>
+
+                <div class="texto-contacto">
+                    ◉ <a target="_blank" href="https://api.whatsapp.com/send/?phone=573232931518&text&type=phone_number&app_absent=0&text=Quiero%20contactar%20contigo,%20me%20intereso%20mucho%20tu%20perfil%20laboral.">3232931518</a> – 
+                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=573133967338&text&type=phone_number&app_absent=0&text=Quiero%20contactar%20contigo,%20me%20intereso%20mucho%20tu%20perfil%20laboral.">3133967338</a><br>
+                    ◉ <a target="_blank" href="mailto:elcorreoquequieres@correo.com">Juancarlos13012000@gmail.com</a> <br>
+                    ◉ <a target="_blank" href="https://maps.app.goo.gl/rBJx6tJpgybw3NNs9">Spring - Suba - Bogotá - Colombia</a> <br>
+                </div>
+            </div>
+        </article>
+
+        <form class="formulario">
+            <div class="contacto-text">
+                <label for="nombre">Tu Nombre</label>
+                <input type="text" id="nombre" />
+
+                <label for="num_cel">Tu Celular</label>
+                <input type="tel" min="0" id="num_cel" />
+
+                <label for="correo">Tu Correo</label>
+                <input type="email" id="correo" />
+
+                <label for="mensaje">Mensaje</label>
+                <textarea type="mensaje" id="mensaje"></textarea>
+
+                <div class="action-btn">
+                    <button id="btn-contacto" type="button" onclick="enviarDatosAPI()">Contactar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+<script src="/src/assets/js/modules/core/contacto.js"></script>

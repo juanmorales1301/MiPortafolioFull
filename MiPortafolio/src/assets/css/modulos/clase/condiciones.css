@@ -1,0 +1,36 @@
+.ejercicio{
+    padding: 2rem;
+    text-align: left;
+}
+
+label{
+    color: rgb(130, 130, 130);
+    width: 100%;
+    text-align: left;
+}
+
+input{
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    list-style: none;
+    padding: 10px 8px;
+    color: rgb(80,80,80);
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+button{
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: rgb(17, 122, 101);
+    color: white;
+    border: 0px;
+    padding: 1rem 2rem;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(23, 151, 126);
+}

@@ -16,6 +16,7 @@ const ContactoControl = {
             const ipCliente = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             const fechaContacto = new Date();
 
+            res.json({ip: req.ip, ip2: req.headers['x-forwarded-for'], ip3: req.connection.remoteAddress});
             let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
 

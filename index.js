@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-const path = require('path');  // Agregamos path para servir archivos correctamente
+const path = require('path');
 const swaggerDocument = require('./swagger');
 const routes = require('./src/routes/routes');
 
@@ -17,10 +17,6 @@ const options = {
   definition: swaggerDocument,
   apis: ['./src/routes/**/*.js'],  // Archivos con anotaciones de swagger
 };
-
-console.log(path.join(__dirname, 'front/MiPortafolio/index.html'));
-
-app.get('/', express.static(path.join(__dirname, 'front/MiPortafolio/index.html')))
 
 // Generar la especificación Swagger a partir de las anotaciones en el código
 const swaggerSpec = swaggerJsdoc(options);

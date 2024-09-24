@@ -1,11 +1,14 @@
 {
-  "name": "ejercicionodejs",
+  "name": "mi-portafolio",
   "version": "1.0.0",
-  "description": "Proyecto de pruebas para en NodeJS TalentoTech",
+  "description": "Proyecto Mi Portafolio TalentoTech",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon index.js"
+    "start": "npm run build && nodemon index.js",
+    "build": "npm i && npm run build-front",
+    "build-front": "cd front/v-portafolio && npm i && npm run build",
+    "start-v-front": "cd front/v-portafolio && npm run dev"
   },
   "repository": {
     "type": "git",

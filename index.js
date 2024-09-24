@@ -18,6 +18,8 @@ const options = {
   apis: ['./src/routes/**/*.js'],  // Archivos con anotaciones de swagger
 };
 
+console.log(path.join(__dirname, 'front/MiPortafolio/index.html'));
+
 app.get('/', express.static(path.join(__dirname, 'front/MiPortafolio/index.html')))
 
 // Generar la especificación Swagger a partir de las anotaciones en el código

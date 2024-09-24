@@ -2,13 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "front/v-portafolio/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "front/v-portafolio/dist"
-      }
-    },
-    {
       "src": "index.js",
       "use": "@vercel/node"
     }
@@ -19,8 +12,12 @@
       "dest": "/index.js"
     },
     {
+      "src": "/galeria/(.*)",
+      "dest": "/index.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "front/v-portafolio/dist/$1"
+      "dest": "/index.js"
     }
   ]
 }

@@ -4,11 +4,9 @@
   "description": "Proyecto Mi Portafolio TalentoTech",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "npm run build && nodemon index.js",
-    "build": "npm i && npm run build-front",
-    "build-front": "cd front/v-portafolio && npm i && npm run build",
-    "start-v-front": "cd front/v-portafolio && npm run dev"
+    "start": "npm run build && node index.js",
+    "build": "npm run build-front",
+    "build-front": "cd front/v-portafolio && npm install && npm run build"
   },
   "repository": {
     "type": "git",

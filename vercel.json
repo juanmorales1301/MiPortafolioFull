@@ -2,17 +2,24 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "front/v-portafolio/package.json", 
+      "use": "@vercel/static-build", 
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/node_modules/swagger-ui-dist/(.*)",
-      "dest": "/"
+      "src": "/(.*)", 
+      "dest": "front/v-portafolio/dist/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)", 
       "dest": "/index.js"
     }
   ]

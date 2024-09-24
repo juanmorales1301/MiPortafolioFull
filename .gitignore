@@ -1,0 +1,29 @@
+```gitignore
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Directorio de pruebas de cobertura
+coverage/
+
+# Configuración local
+*.local
+
+# Archivos de configuración del editor
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos generados por el sistema operativo
+Thumbs.db
+Desktop.ini
+.vercel

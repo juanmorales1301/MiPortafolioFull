@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi portafolio Juan</title>
+
+    <link rel="stylesheet" href="/src/assets/css/index.css" />
+    <script src="/src/assets/js/shared/contenido.js"></script>
+    <link rel="stylesheet" href="/src/assets/css/shared/all.min.css" />
+    <script src="/src/assets/js/shared/all.min.js"></script>
+</head>
+
+<body>
+    <div class="contenido-clase">
+        <div id="clase-if"></div>
+        <div id="bucle-for"></div>
+    </div>
+
+    <div class="content-main">
+        <div id="header"></div>
+        <div id="estadisticos"></div>
+        <div id="home"></div>
+        <div id="tecnologias"></div>
+        <div id="acerca"></div>
+        <div id="experiencia"></div>
+        <div id="contacto"></div>
+        <div id="footer"></div>
+    </div>
+
+
+    <script>
+        cargarContenido("header", "/src/app/modules/core/header.html");
+        cargarContenido("estadisticos", "/src/app/modules/core/estadisticos.html");
+        cargarContenido("home", "/src/app/modules/core/home.html");
+        cargarContenido("tecnologias", "/src/app/modules/core/lenguajes.html");
+        cargarContenido("acerca", "/src/app/modules/core/acerca.html");
+        cargarContenido("experiencia", "/src/app/modules/core/experiencia.html");
+        cargarContenido("contacto", "/src/app/modules/core/contacto.html");
+        cargarContenido("footer", "/src/app/modules/core/footer.html");
+        //cargarContenido("clase-if", "/src/app/modules/clase/condiciones.html");
+        cargarContenido("bucle-for", "/src/app/modules/clase/bucle_for.html");
+    </script>
+</body>
+
+</html>

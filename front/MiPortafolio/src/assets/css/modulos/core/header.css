@@ -1,0 +1,253 @@
+.header {
+  width: 100%;
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+}
+
+.content-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .panel1 {
+  width: 60%;
+  background-color: var(--primary-color-dark);
+  height: 100%;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5rem 12rem 5rem 7rem;
+}
+
+.header .panel2 {
+  width: 40%;
+  height: 100%;
+  background: rgb(241, 196, 15);
+  background: linear-gradient(90deg, rgba(241, 196, 15, 1) 0%, rgba(241, 196, 15, 1) 35%);
+}
+
+.header .tit-important {
+  width: 100%;
+  transition: 0.3s;
+}
+
+.header h1 {
+  font-size: 4.4rem;
+}
+
+.header h2 {
+  font-size: 1.6rem;
+}
+
+.header .buttons-header ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header .buttons-header li {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+}
+
+.header .buttons-header a {
+  display: flex;
+  border: 1px solid white;
+  color: white;
+  padding: 15px 30px;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 0px;
+  text-shadow: none;
+  -webkit-transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  outline-color: rgba(255, 255, 255, 0.5);
+  outline-offset: 0px;
+}
+
+.header .buttons-header a:hover {
+  cursor: pointer;
+  color: white;
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+  outline-offset: 15px;
+  outline-color: rgba(255, 255, 255, 0);
+  text-shadow: 1px 1px 2px #427388;
+}
+
+.header .imagen-perfil {
+  width: 25vw;
+  position: relative;
+  left: -12.5vw;
+}
+
+.header .imagen-perfil img {
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0px 7px 14px rgba(100, 100, 100, 0.25);
+  z-index: 10;
+  display: block;
+  position: relative;
+  display: block;
+}
+
+.header .imagen-perfil::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.header .fondo-panel svg {
+  position: absolute;
+  z-index: 1;
+  width: 30%;
+  top: 0px;
+  right: 0px;
+  padding: 2rem;
+}
+
+.header .redes-sociales {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+.header .redes-sociales a {
+  color: var(--primary-color-dark);
+  text-decoration: none;
+  padding: 15px;
+  font-size: 2rem;
+  transition: 0.3s;
+}
+
+.header .redes-sociales svg{
+  transition: 0.2s;
+}
+
+.header .redes-sociales svg:hover {
+  transform: scale(1.2);
+}
+
+
+@media (max-width: 1200px) {
+  .header .panel1 {
+    width: 60%;
+    padding: 1rem 5rem 1rem 3rem;
+  }
+  
+  .header .panel2 {
+    width: 40%;
+  }
+
+  .header h1 {
+    font-size: 3.4rem;
+  }
+  
+  .header h2 {
+    font-size: 1.2rem;
+  }
+
+  .header .redes-sociales {
+    padding: 5px;
+  }
+
+  .header .redes-sociales a {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 800px) {
+  .header{
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  .content-header {
+    flex-wrap: wrap;
+  }
+
+  .header .panel1 {
+    width: 100%;
+    padding: 1rem 1rem 7rem 1rem;
+    flex-wrap: wrap;
+    min-height: 40rem !important;
+    height: auto !important;
+  }
+  
+  .header .panel2 {
+    width: 100%;
+    flex-wrap: wrap;
+    height: auto !important;
+    min-height: 20rem !important;
+  }
+
+  .header .buttons-header ul {
+    gap: 1.2rem;
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+  
+  .header h1 {
+    font-size: 2.4rem;
+  }
+  
+  .header h2 {
+    font-size: 1rem;
+  }
+
+  .header .redes-sociales {
+    padding: 5px;
+  }
+
+  .header .redes-sociales a {
+    padding: 10px;
+  }
+
+  .header .imagen-perfil {
+    width: 35vw;
+    position: relative;
+    left: calc(50% - 17.5vw) !important;
+    top: -8rem;
+  }
+
+  .header .redes-sociales{
+    display: flex;
+    position: relative;    
+  }
+}
+
+@media (max-width: 600px) {
+  .header .imagen-perfil {
+    width: 45vw;
+    top: -8rem;
+  }
+
+}

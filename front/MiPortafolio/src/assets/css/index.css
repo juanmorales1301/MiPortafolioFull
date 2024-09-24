@@ -1,0 +1,51 @@
+* {
+    font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html,
+body,
+.content-main {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+:root {
+    --primary-color: rgb(40, 116, 166);
+    --primary-text-color: rgb(255, 255, 255);
+    --primary-color-ligth: rgb(68, 137, 184);
+    --secondary-color: #2ecc71;
+    --secondary-text-color: rgb(255, 255, 255);
+    --primary-color-dark: rgb(30, 73, 101);
+}
+
+.titulo {
+    color: rgb(61, 61, 61);
+    background-color: transparent;
+    padding: 20px;
+}
+
+.content-main {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: auto;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.content-main *{
+    width: auto;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-main > div{
+    width: 100%;
+}

@@ -1,0 +1,115 @@
+.content-acerca {
+  display: flex;
+  padding: 3rem 0rem;
+  background-color: var(--primary-color);
+  flex-direction: row;
+  width: 100%;
+  min-height: 60vh;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.img-acerca {
+  display: flex;
+  height: 100%;
+}
+
+.img-acerca img {
+  width: 50vw;
+  max-width: 70vh;
+  max-height: 70vh;
+  z-index: 1;
+}
+
+.img-acerca::after {
+  position: absolute;
+  content: "";
+  width: 20vh;
+  height: 20vh;
+  box-shadow: 0 0 150px 100px rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.acerca {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: white;
+  width: 100%;
+}
+
+.acerca > *,
+.acerca h3 {
+  display: flex;
+  padding: 0px;
+  font-weight: 300 !important;
+  margin: 0px;
+}
+
+.acerca-text {
+  width: 500px;
+  min-height: 60vh;
+  padding: 1rem;
+}
+
+.acerca-text .parrafo-acerca {
+  font-family: system-ui;
+  font-size: 14.5px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding-top: 2.5rem;
+}
+
+.acerca-text .importante {
+  font-weight: 700;
+}
+
+.titulo-acerca {
+  text-align: left;
+  justify-content: flex-start;
+  display: block;
+}
+
+.titulo-acerca .tit-principal {
+  display: block;
+  font-size: 3.5rem;
+}
+
+.titulo-acerca .tit-secundario {
+  display: block;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+  .img-acerca {
+    position: absolute;
+    justify-content: flex-start;
+    z-index: 1;
+  }
+
+  .titulo-acerca {
+    text-align: center;
+  }
+  
+  .acerca {
+    background-color: rgba(40, 116, 166, 0.9);
+    z-index: 2;
+  }
+}
+
+@media (max-width: 700px) {
+    .acerca, .content-acerca, .img-acerca{
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .img-acerca img {
+      width: 70vw;
+      height: 70vw;
+      z-index: 1;
+    }
+    
+}

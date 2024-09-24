@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node index.js",
     "build": "npm run build-front",
-    "build-front": "cd front/v-portafolio && npm install && npm run build"
+    "build-front": "cd front/v-portafolio && npm install && npm run build",
+    "start-front": "cd front/v-portafolio && npm install && npm run dev"
   },
   "repository": {
     "type": "git",

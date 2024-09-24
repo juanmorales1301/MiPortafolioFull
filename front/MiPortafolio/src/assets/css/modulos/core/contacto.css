@@ -46,9 +46,9 @@
   padding-top: 2.5rem;
 }
 
-.contacto .texto-contacto {
-  color: white;
-  text-decoration: none;
+.contacto .texto-contacto a{
+  color: white !important;
+  text-decoration: none !important;
 }
 
 .contacto .formulario {

@@ -34,7 +34,7 @@ const ContactoControl = {
                 nombre,
                 apellido: '-',
                 tipoIdentificacion: 'Cédula de Ciudadanía',
-                identificacion: '0',
+                identificacion: celular,
                 direccion: 'NA',
                 celular,
                 telefono: celular,

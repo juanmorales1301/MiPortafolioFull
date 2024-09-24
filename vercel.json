@@ -2,10 +2,10 @@
   "version": 2,
   "builds": [
     {
-      "src": "front/v-portafolio/package.json", 
-      "use": "@vercel/static-build", 
+      "src": "front/v-portafolio/package.json",
+      "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "front/v-portafolio/dist"
       }
     },
     {
@@ -15,12 +15,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)", 
-      "dest": "front/v-portafolio/dist/$1"
+      "src": "/api/(.*)",
+      "dest": "/index.js"
     },
     {
-      "src": "/api/(.*)", 
-      "dest": "/index.js"
+      "src": "/(.*)",
+      "dest": "front/v-portafolio/dist/$1"
     }
   ]
 }

@@ -90,9 +90,28 @@ Este proyecto es servido de manera estática a través del servidor **Express**.
 El archivo `.env` debe contener las siguientes variables:
 
 ```bash
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/tu-base-datos
-JWT_SECRET=tu_secreto_jwt
+DB_TYPE=mongoose
+RUTA_INIT=/app
+PORT=90
+DOMAIN=localhost
+
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=****** # Reemplazar con la contraseña real
+MYSQL_DB=practicas
+MYSQL_PORT=3306
+
+POSTGRES_HOST=ep-muddy-resonance-a4y91c6m.us-east-1.pg.koyeb.app
+POSTGRES_USER=koyeb-adm
+POSTGRES_PASSWORD=****** # Reemplazar con la contraseña real
+POSTGRES_DB=koyebdb
+POSTGRES_PORT=5432
+
+MONGODB_URI=mongodb+srv://******:******@cluster0.lol1r.mongodb.net/ # Reemplazar con el URI completo
+
+VITE_API_BASE_URL=http://localhost
+VITE_API_SUB_DOM=app
+VITE_API_PORT=90
 ```
 
 ---

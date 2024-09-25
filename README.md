@@ -118,8 +118,11 @@ VITE_API_PORT=90
 
 ## 🚀 Despliegue
 
-El proyecto está preparado para su despliegue en **Vercel** con configuraciones generales en el archivo de configuración, que maneja tanto el backend como el frontend.
+El proyecto está preparado para su despliegue en **Vercel** con configuraciones generales en el archivo de configuración, que maneja tanto el backend como el frontend. Para desplegar en producción utiliza:
 
+```
+vercel --prod
+```
 ---
 
 ## 📚 Documentación de la API

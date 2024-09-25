@@ -1,10 +1,13 @@
 const Album = require('../../../model/modules/galeria/album.model');
+const conexionModel = require('../../../model/modules/core/connection.js');
 
 const ControllerAlbum = {
     // Crear un nuevo álbum
     crearAlbum: async (req, res, next) => {
         try {
             const { nombre, descripcion, usuario_id, numero_imagenes, estado } = req.body;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
             const nuevoAlbum = new Album({
                 nombre,
@@ -26,6 +29,9 @@ const ControllerAlbum = {
     getAlbumes: async (req, res, next) => {
         try {
             const albumes = await Album.find();
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             return res.status(200).json(albumes);
         } catch (error) {
             console.error(error);
@@ -37,6 +43,9 @@ const ControllerAlbum = {
     getAlbumById: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const album = await Album.findById(id);
             if (!album) {
                 return res.status(404).json({ mensaje: 'Álbum no encontrado' });
@@ -52,6 +61,9 @@ const ControllerAlbum = {
     getAlbumesByUsuarioId: async (req, res, next) => {
         try {
             const { usuario_id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const albumes = await Album.find({ usuario_id });
             if (!albumes.length) {
                 return res.status(404).json({ mensaje: 'No se encontraron álbumes para este usuario' });
@@ -68,6 +80,9 @@ const ControllerAlbum = {
         try {
             const { id } = req.params;
             const { nombre, descripcion, numero_imagenes, estado } = req.body;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
 
             const albumActualizado = await Album.findByIdAndUpdate(
                 id,
@@ -90,6 +105,9 @@ const ControllerAlbum = {
     eliminarAlbum: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
 
             const albumEliminado = await Album.findByIdAndDelete(id);
             if (!albumEliminado) {

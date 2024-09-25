@@ -1,4 +1,5 @@
 const express = require('express');
+const routesAuth = require('./auth.route');
 const routesLog = require('./log.route');
 
 const router = express.Router();
@@ -10,6 +11,7 @@ const router = express.Router();
  *   description: Rutas relacionadas con la autentificacion
  */
 
+router.use('/auth', routesAuth);
 router.use('/log', routesLog);
 
 module.exports = router;

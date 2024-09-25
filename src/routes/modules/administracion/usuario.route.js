@@ -11,41 +11,6 @@ const router = express.Router();
  *   description: API para gestionar usuarios
  */
 
-/**
- * @swagger
- * /usuario/autentificar:
- *   post:
- *     summary: Autenticar un usuario y obtener un token JWT
- *     tags: [Usuarios]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               correoElectronico:
- *                 type: string
- *                 description: Correo electrónico del usuario
- *               contrasena:
- *                 type: string
- *                 description: Contraseña del usuario
- *     responses:
- *       200:
- *         description: Token generado correctamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *       401:
- *         description: Credenciales incorrectas
- */
-
-// Autenticación (Login) - No requiere token
-router.post('/autentificar', UsControl.autenticarUsuario);
 
 /**
  * @swagger

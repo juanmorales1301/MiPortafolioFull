@@ -11,6 +11,7 @@ const router = express.Router();
  *   description: API para gestionar logs de actividades
  */
 
+
 /**
  * @swagger
  * /log:

@@ -1,10 +1,14 @@
 const Imagen = require('../../../model/modules/galeria/imagen.model');
+const conexionModel = require('../../../model/modules/core/connection.js');
 
 const ControllerImagen = {
     // Crear una nueva imagen
     crearImagen: async (req, res, next) => {
         try {
             const { album_id, url, titulo, descripcion, estado } = req.body;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
 
             const nuevaImagen = new Imagen({
                 album_id,
@@ -25,6 +29,9 @@ const ControllerImagen = {
     // Obtener todas las imágenes
     getImagenes: async (req, res, next) => {
         try {
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const imagenes = await Imagen.find();
             return res.status(200).json(imagenes);
         } catch (error) {
@@ -37,6 +44,9 @@ const ControllerImagen = {
     getImagenById: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const imagen = await Imagen.findById(id);
             if (!imagen) {
                 return res.status(404).json({ mensaje: 'Imagen no encontrada' });
@@ -52,6 +62,9 @@ const ControllerImagen = {
     getImagenesByAlbumId: async (req, res, next) => {
         try {
             const { album_id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const imagenes = await Imagen.find({ album_id });
             if (!imagenes.length) {
                 return res.status(404).json({ mensaje: 'No se encontraron imágenes para este álbum' });
@@ -67,6 +80,9 @@ const ControllerImagen = {
     actualizarImagen: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const { url, titulo, descripcion, estado } = req.body;
 
             const imagenActualizada = await Imagen.findByIdAndUpdate(
@@ -90,6 +106,9 @@ const ControllerImagen = {
     eliminarImagen: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
 
             const imagenEliminada = await Imagen.findByIdAndDelete(id);
             if (!imagenEliminada) {

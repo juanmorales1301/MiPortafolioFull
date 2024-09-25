@@ -1,41 +1,94 @@
-### **README.md**
-
-Este archivo documenta cómo utilizar la aplicación, los pasos para instalarla, ejecutarla y probarla.
-
 ```markdown
-# API REST de Usuarios con Autenticación JWT
+# 🚀 Proyecto Complejo en Node.js con Autenticación JWT y Frontend Portafolio 📂
 
-Se presenta una API REST para la gestión de usuarios, que utiliza autenticación con **JWT (JSON Web Token)** y está desarrollada en **Node.js** utilizando **Express**. La API está documentada con **Swagger** y se utilizan **Jest** para pruebas unitarias.
+Bienvenido a **Mi Proyecto Complejo** desarrollado en **Node.js**, que incluye autenticación mediante **JWT** y una arquitectura avanzada de frontend y backend. Este sistema abarca:
 
-## Características
+- 🔐 **Autenticación de Usuarios**: Gestión de usuarios con **JSON Web Tokens**.
+- 🖥️ **Portafolio Personal**: Un sitio web donde se presentan tus habilidades y experiencia profesional, desarrollado en **HTML5, CSS3 y JavaScript**.
+- 🖼️ **Galería Administrativa**: Un sistema interno administrativo desarrollado en **Vue.js**, accesible desde tu portafolio mediante un enlace.
 
-- Autenticación de usuarios con JWT.
-- CRUD completo para gestionar usuarios.
-- Protección de rutas con autenticación JWT.
-- Documentación de la API con Swagger.
-- Pruebas unitarias con Jest y Supertest.
+Este proyecto está pensado para ser una plataforma integral que no solo gestiona usuarios, sino que también muestra tus capacidades profesionales y permite la administración interna mediante una interfaz dinámica en Vue. Todo está estructurado para desplegarse en **Vercel** de manera eficiente y escalable.
 
-## Requisitos
+---
 
-- Node.js v12 o superior
-- npm o yarn
-- MongoDB (local o en la nube, como MongoDB Atlas)
+## 🛠️ Estructura del Proyecto
 
-## Instalación
+- **Backend:**
+  - 🔧 Desarrollado en **Node.js** con **Express**.
+  - 🔐 Autenticación mediante **JWT** para la seguridad.
+  - 📚 Documentación de la API generada automáticamente con **Swagger**.
+  - ✅ Pruebas unitarias y de integración utilizando **Jest** y **Supertest**.
 
-1. Clonar el repositorio:
+- **Frontend:**
+  - 🌐 **Portafolio Personal** en **HTML5/CSS3/JavaScript**: Presenta tus habilidades y experiencia.
+  - 📊 **Galería Administrativa** en **Vue.js**: Sistema interno administrativo accesible desde el portafolio.
 
-```bash
-git clone https://github.com/juanmorales1301/ProyectoNodeJS.git
-```
+---
 
-2. Instalar las dependencias:
+## 🛠️ Herramientas Utilizadas
 
-```bash
-npm install
-```
+| **Herramienta** | **Descripción** |
+| --- | --- |
+| 🟢 **Node.js** | Plataforma backend principal. |
+| ⚙️ **Express** | Framework para el servidor. |
+| 🔐 **JWT** | Sistema de autenticación seguro. |
+| 📚 **Swagger** | Documentación de la API. |
+| 🧪 **Jest** | Pruebas unitarias. |
+| 🧪 **Supertest** | Pruebas de integración. |
+| 🍃 **MongoDB** | Base de datos NoSQL. |
+| 🖼️ **Vue.js** | Framework frontend para la galería. |
+| 🚀 **Vite** | Herramienta de construcción y servidor de desarrollo. |
+| 🌐 **HTML5/CSS3/JS** | Base del portafolio personal. |
 
-3. Crear el archivo `.env` en la raíz del proyecto con las siguientes variables de entorno:
+---
+
+## 📦 Comandos Principales
+
+### 🖥️ Backend
+
+- Instalar las dependencias del proyecto:
+  ```bash
+  npm install
+  ```
+
+- Iniciar el servidor backend:
+  ```bash
+  npm start
+  ```
+
+- Ejecutar las pruebas unitarias:
+  ```bash
+  npm test
+  ```
+
+### 🌐 Frontend: v-portafolio (Galería en Vue)
+
+- Iniciar el servidor de desarrollo del proyecto Vue:
+  ```bash
+  npm run start-front
+  ```
+
+- Construir el proyecto para producción:
+  ```bash
+  npm run build-front
+  ```
+
+#### 📂 Proyecto HTML5: MiPortafolio
+
+Este proyecto es servido de manera estática a través del servidor **Express**.
+
+### 🔄 Comandos Combinados
+
+- Ejecutar tanto el backend como el frontend al mismo tiempo:
+  ```bash
+  npm run start
+  ```
+
+---
+
+## ⚙️ Configuración de Entorno
+
+El archivo `.env` debe contener las siguientes variables:
 
 ```bash
 PORT=3000
@@ -43,115 +96,37 @@ MONGODB_URI=mongodb://localhost:27017/tu-base-datos
 JWT_SECRET=tu_secreto_jwt
 ```
 
-4. Ejecutar la aplicación:
+---
 
-```bash
-npm start
-```
+## 🚀 Despliegue
 
-## Uso de la API
+El proyecto está preparado para su despliegue en **Vercel** con configuraciones generales en el archivo de configuración, que maneja tanto el backend como el frontend.
 
-### Autenticación (Login)
+---
 
-```
-POST /usuario/autentificar
-```
+## 📚 Documentación de la API
 
-Autentica al usuario y devuelve un token JWT.
-
-#### Request Body:
-
-```json
-{
-  "correoElectronico": "usuario@ejemplo.com",
-  "contrasena": "123456"
-}
-```
-
-#### Response:
-
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-### Obtener todos los usuarios (Protegido)
+La documentación de la API es generada automáticamente con **Swagger** y se encuentra disponible en la siguiente URL una vez que la aplicación está en ejecución:
 
 ```
-GET /usuario
+http://localhost:3000/api-docs
 ```
 
-Retorna una lista de todos los usuarios registrados.
+---
 
-#### Headers:
+## ✅ Pruebas Unitarias
 
-```json
-{
-  "x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-#### Response:
-
-```json
-[
-  {
-    "nombre": "John",
-    "apellido": "Doe",
-    "correoElectronico": "john@doe.com"
-  }
-]
-```
-
-### Crear un nuevo usuario (Protegido)
-
-```
-POST /usuario
-```
-
-Crea un nuevo usuario.
-
-#### Request Body:
-
-```json
-{
-  "nombre": "Nuevo",
-  "apellido": "Usuario",
-  "correoElectronico": "nuevo@usuario.com",
-  "contrasena": "123456",
-  "telefono": "123456789",
-  "direccion": "Calle Falsa 123"
-}
-```
-
-#### Response:
-
-```json
-{
-  "mensaje": "Usuario creado exitosamente"
-}
-```
-
-## Documentación de la API
-
-La documentación de la API se genera automáticamente con **Swagger** y está disponible en la siguiente URL:
-
-```
-http://localhost:6000/api-docs
-```
-
-## Pruebas unitarias
-
-Para ejecutar las pruebas unitarias, se debe utilizar el siguiente comando:
+Para ejecutar las pruebas unitarias del backend, usa el siguiente comando:
 
 ```bash
 npm test
 ```
 
-Las pruebas están escritas utilizando **Jest** y **Supertest**.
+Las pruebas están implementadas con **Jest** y **Supertest**.
 
-## Contribuir
+---
+
+## 🤝 Contribuir
 
 1. Hacer un fork del repositorio.
 2. Crear una nueva rama (`git checkout -b feature-nueva`).
@@ -159,7 +134,9 @@ Las pruebas están escritas utilizando **Jest** y **Supertest**.
 4. Hacer push a la rama (`git push origin feature-nueva`).
 5. Crear un Pull Request.
 
-## Licencia
+---
 
-Este proyecto está licenciado bajo la Licencia MIT - consultar el archivo [LICENSE](LICENSE) para más detalles.
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 ```

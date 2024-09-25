@@ -1,7 +1,9 @@
 <template>
     <div class="cont-login">
         <div class="tarj-login">
-            <FormLogin />
+            <div class="cont-tarj">
+                <FormLogin />
+            </div>
         </div>
     </div>
 </template>
@@ -29,9 +31,13 @@ import FormLogin from '@/components/modules/admin/login/FormLogin.vue';
     max-width: 500px;
     width: 95%;
     justify-content: center;
-    padding: 2rem;
+    padding: 0px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cont-tarj {
+    padding: 2rem;
 }
 </style>

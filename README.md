@@ -1,4 +1,4 @@
-# 🚀 Proyecto Complejo en Node.js con Autenticación JWT y Frontend Portafolio 📂
+# 🚀 Proyecto en Node.js con Autenticación JWT y Frontend Portafolio 📂
 
 Bienvenido a **Mi Proyecto Complejo** desarrollado en **Node.js**, que incluye autenticación mediante **JWT** y una arquitectura avanzada de frontend y backend. Este sistema abarca:
 

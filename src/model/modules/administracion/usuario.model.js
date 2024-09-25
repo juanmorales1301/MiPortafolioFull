@@ -49,11 +49,30 @@ const usuarioSchema = new mongoose.Schema({
     activo: {
         type: Boolean,
         default: true
+    },
+    creado_en: {
+        type: Date,
+        default: Date.now
+    },
+    modificado_en: {
+        type: Date,
+        default: Date.now
+    },
+    modificado_por: {
+        type: String
+    },
+    ultimo_login: {
+        type: Date
+    },
+    estado: {
+        type: String,
+        enum: ['activo', 'inactivo'],
+        default: 'activo'
     }
 });
 
 // Middleware para encriptar la contraseña antes de guardarla
-usuarioSchema.pre('save', async function(next) {
+usuarioSchema.pre('save', async function (next) {
     if (!this.isModified('contrasena')) {
         return next();
     }
@@ -67,11 +86,9 @@ usuarioSchema.pre('save', async function(next) {
 });
 
 // Método para comparar contraseñas
-usuarioSchema.methods.compararContrasena = async function(contrasenaIngresada) {
+usuarioSchema.methods.compararContrasena = async function (contrasenaIngresada) {
     return await bcrypt.compare(contrasenaIngresada, this.contrasena);
 };
 
 // Creación del modelo Usuario
-const Usuario = mongoose.model('Usuario', usuarioSchema);
-
-module.exports = Usuario;
+module.exports = mongoose.model('Usuario', usuarioSchema);

@@ -19,7 +19,7 @@ Este proyecto está pensado para ser una plataforma integral que no solo gestion
   - ✅ Pruebas unitarias y de integración utilizando **Jest** y **Supertest**.
 
 - **Frontend:**
-  - 🌐 **Portafolio Personal** en **HTML5/CSS3/JavaScript**: Presenta tus habilidades y experiencia.
+  - 🌐 **Portafolio Personal** en **HTML5/CSS3/JavaScript**: Presenta mis habilidades y experiencia.
   - 📊 **Galería Administrativa** en **Vue.js**: Sistema interno administrativo accesible desde el portafolio.
 
 ---

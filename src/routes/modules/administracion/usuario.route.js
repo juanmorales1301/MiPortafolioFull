@@ -183,7 +183,7 @@ router.get('/identificacion/:identificacion', authMid, UsControl.getUsuarioByIde
  *         description: Usuario creado correctamente
  */
 
-router.post('/', authMid, UsControl.crearUsuario);  // Crear un nuevo usuario
+router.post('/', UsControl.crearUsuario);  // Crear un nuevo usuario
 
 /**
  * @swagger

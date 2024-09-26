@@ -26,14 +26,14 @@ import GroupInput from '@/components/shared/forms/GroupInput.vue';
 import InputForm from '@/components/shared/forms/InputForm.vue';
 import ButtonForm from '@/components/shared/forms/ButtonForm.vue';
 import { ref } from 'vue';
-import { useHttp } from '@/composables/core/useHttp';
+import { useAuth } from '@/composables/modules/core/useAuth';
 
 
 // Variables reactivas para capturar los datos
 const username = ref('');
 const password = ref('');
 
-const { login } = useHttp();
+const { login } = useAuth();
 
 // Función para manejar el envío del formulario
 const eventoLogin = async () => {

@@ -94,6 +94,7 @@ DB_TYPE=mongoose
 RUTA_INIT=/app
 PORT=90
 DOMAIN=localhost
+JWT_SECRET="LLAVE_JWT"
 
 MYSQL_HOST=localhost
 MYSQL_USER=root

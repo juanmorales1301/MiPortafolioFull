@@ -1,10 +1,13 @@
 const Usuario = require('../../../model/modules/administracion/usuario.model');
+const conexionModel = require('../../../model/modules/core/connection.js');
 
 const ControllerUsuario = {
     
     // Obtener todos los usuarios
     getUsuarios: async (req, res, next) => {
         try {
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const usuarios = await Usuario.find();
             return res.status(200).json(usuarios);
         } catch (error) {
@@ -17,6 +20,9 @@ const ControllerUsuario = {
     getUsuarioById: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const usuario = await Usuario.findById(id);
             if (!usuario) {
                 return res.status(404).json({ mensaje: 'Usuario no encontrado' });
@@ -32,6 +38,9 @@ const ControllerUsuario = {
     getUsuarioByIdentificacion: async (req, res, next) => {
         try {
             const { identificacion } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const usuario = await Usuario.findOne({ identificacion });
             if (!usuario) {
                 return res.status(404).json({ mensaje: 'Usuario no encontrado con esa identificación' });
@@ -47,6 +56,9 @@ const ControllerUsuario = {
     getUsuarioByCorreo: async (req, res, next) => {
         try {
             const { correoElectronico } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const usuario = await Usuario.findOne({ correoElectronico });
             if (!usuario) {
                 return res.status(404).json({ mensaje: 'Usuario no encontrado con ese correo electrónico' });
@@ -62,6 +74,9 @@ const ControllerUsuario = {
     getUsuarioByCorreoYContrasena: async (req, res, next) => {
         try {
             const { correoElectronico, contrasena } = req.body;  // Tomamos los datos del cuerpo de la petición
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+            
             const usuario = await Usuario.findOne({ correoElectronico, contrasena });
             if (!usuario) {
                 return res.status(404).json({ mensaje: 'Usuario o contraseña incorrectos' });
@@ -77,6 +92,8 @@ const ControllerUsuario = {
     crearUsuario: async (req, res, next) => {
         try {
             const { nombre, apellido, tipoIdentificacion, identificacion, direccion, correoElectronico, contrasena, telefono } = req.body;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
             // Validar si ya existe un usuario con ese correo o identificación
             const existeCorreo = await Usuario.findOne({ correoElectronico });
@@ -113,6 +130,8 @@ const ControllerUsuario = {
             const { id } = req.params;
             const { nombre, apellido, tipoIdentificacion, identificacion, direccion, correoElectronico, contrasena, telefono, activo } = req.body;
 
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
             const usuarioActualizado = await Usuario.findByIdAndUpdate(
                 id,
                 { nombre, apellido, tipoIdentificacion, identificacion, direccion, correoElectronico, contrasena, telefono, activo },
@@ -134,6 +153,8 @@ const ControllerUsuario = {
     eliminarUsuario: async (req, res, next) => {
         try {
             const { id } = req.params;
+
+            let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
              const usuarioEliminado = await Usuario.findByIdAndDelete(id);
             if (!usuarioEliminado) {

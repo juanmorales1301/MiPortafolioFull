@@ -1,8 +1,14 @@
 <template>
     <div class="cont-login">
         <div class="tarj-login">
+            <div class="tabs">
+                <TabsButton :options="tabsOptions" :activeIndex="0" tabBackgroundColor="#f9f9f9" tabBorderColor="#ccc"
+                    tabTextColor="#333" tabActiveColor="#007bff" @click="handleTabClick" tabBorderTopLeftRadius="15px"
+                    tabBorderTopRightRadius="15px" tabBorderBottomLeftRadius="0" tabBorderBottomRightRadius="0" />
+            </div>
             <div class="cont-tarj">
-                <FormLogin />
+                <FormLogin v-if="activeTab == 0" />
+                <FormRegUsuario v-else-if="activeTab == 1" />
             </div>
         </div>
     </div>
@@ -10,10 +16,27 @@
 
 <script setup lang="ts">
 import FormLogin from '@/components/modules/admin/login/FormLogin.vue';
+import FormRegUsuario from '@/components/modules/admin/login/FormRegUsuario.vue';
+import TabsButton from '@/components/shared/components/TabsButton.vue';
+import { ref } from 'vue';
+
+const tabsOptions = [
+    { label: 'Iniciar Sesión' },
+    { label: 'Crear Usuario' },
+];
+
+const activeTab = ref(0);
+const handleTabClick = (index: number) => {
+    activeTab.value = index;
+};
 </script>
 
 
 <style scoped>
+.tabs {
+    width: 100%;
+}
+
 .cont-login {
     display: flex;
     width: 100%;
@@ -30,14 +53,23 @@ import FormLogin from '@/components/modules/admin/login/FormLogin.vue';
     height: auto;
     max-width: 500px;
     width: 95%;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 2rem;
 }
 
 .cont-tarj {
-    padding: 2rem;
+    padding: 2rem 2rem 0rem 2rem;
+    height: 50vh;
+    overflow-y: auto;
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 </style>

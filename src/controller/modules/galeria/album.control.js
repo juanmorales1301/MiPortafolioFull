@@ -28,9 +28,9 @@ const ControllerAlbum = {
     // Obtener todos los álbumes
     getAlbumes: async (req, res, next) => {
         try {
-            const albumes = await Album.find();
-
             let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
+
+            const albumes = await Album.find();
 
             return res.status(200).json(albumes);
         } catch (error) {

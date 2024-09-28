@@ -43,7 +43,8 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue';
-import { useUsuario } from '@/composables/modules/administracion/useUsuario';
+import { useUsuario, type usuarioModel } from '@/composables/modules/administracion/useUsuario';
+import { useModal } from '@/composables/shared/useModal';
 
 // Lazy loading de los componentes
 const FormGroup = defineAsyncComponent(() => import('@/components/shared/forms/FormGroup.vue'));
@@ -51,6 +52,7 @@ const GroupInput = defineAsyncComponent(() => import('@/components/shared/forms/
 const InputForm = defineAsyncComponent(() => import('@/components/shared/forms/InputForm.vue'));
 const SelectForm = defineAsyncComponent(() => import('@/components/shared/forms/SelectForm.vue'));
 const ButtonForm = defineAsyncComponent(() => import('@/components/shared/forms/ButtonForm.vue'));
+
 
 // Variables reactivas para capturar los datos del usuario
 const nombre = ref('');
@@ -61,6 +63,7 @@ const direccion = ref('');
 const correoElectronico = ref('');
 const contrasena = ref('');
 const telefono = ref('');
+const { abrirAlerta } = useModal();
 
 const errors = ref({
   nombre: '',
@@ -105,11 +108,16 @@ const validarFormulario = () => {
 // Función para manejar el envío del formulario
 const eventoRegistro = async () => {
   if (!validarFormulario()) {
-    console.error('Errores en el formulario', errors.value);
+    let objValid = JSON.parse(JSON.stringify(errors.value));
+    for (let key in objValid) {
+      if (objValid[key] !== "") {
+        const idModal = abrirAlerta('Errores en el formulario', objValid[key], 'warning');
+      }
+    }
     return;
   }
 
-  const nuevoUsuario = {
+  const nuevoUsuario: usuarioModel = {
     nombre: nombre.value,
     apellido: apellido.value,
     tipoIdentificacion: tipoIdentificacion.value,

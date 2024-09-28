@@ -2,19 +2,22 @@ import { useHttp } from '@/composables/modules/core/useHttp';
 import { useModal } from '@/composables/shared/useModal';
 const { abrirAlerta } = useModal();
 
+export interface usuarioModel{
+  _id?: any,
+  nombre: string;
+  apellido: string;
+  tipoIdentificacion: string;
+  identificacion: string;
+  direccion: string;
+  correoElectronico: string;
+  contrasena?: string;
+  telefono: string;
+}
+
 export function useUsuario() {
   const { httpPost } = useHttp();
 
-  const crearUsuario = async (usuarioData: {
-    nombre: string;
-    apellido: string;
-    tipoIdentificacion: string;
-    identificacion: string;
-    direccion: string;
-    correoElectronico: string;
-    contrasena: string;
-    telefono: string;
-  }) => {
+  const crearUsuario = async (usuarioData: usuarioModel) => {
     try {
       const response = await httpPost('/admin/usuario', usuarioData);
 

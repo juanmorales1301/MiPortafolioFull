@@ -16,7 +16,7 @@
         <div class="cont-lista">
           <Suspense>
             <template #default>
-              <MenuAlbum></MenuAlbum>
+              <MenuAlbum @galeriaSeleccionada="actualizarImagenes"></MenuAlbum>
             </template>
             <template #fallback>
               <div>Cargando albums...</div>
@@ -37,7 +37,7 @@
       <div class="contenedor-body">
         <Suspense>
           <template #default>
-            <GaleriaDesing></GaleriaDesing>
+            <GaleriaDesing :albumId="albumIdSeleccionado"></GaleriaDesing>
           </template>
           <template #fallback>
             <div>Cargando galeria...</div>
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 import { useSessionStore } from '@/stores/core/auth';
 import router from '@/router';
 
@@ -65,6 +65,12 @@ const cerrarSesion = () => {
   router.push({ name: 'login' });
   window.location.reload();
 };
+
+const albumIdSeleccionado = ref<string>('');
+
+const actualizarImagenes = (albumId: string) => {
+  albumIdSeleccionado.value = albumId; // Actualiza el ID del álbum seleccionado
+};
 </script>
 
 
@@ -76,21 +82,20 @@ const cerrarSesion = () => {
 }
 
 .panel-left {
-  max-width: 30vw;
+  width: 30vw;
+  max-width: 320px;
   background-color: rgb(245, 245, 245);
   height: 100vh;
   overflow-y: auto;
 }
 
 .panel-right {
-  max-width: 70vw;
+  width: 100%;
   height: 100vh;
   overflow-y: auto;
-}
-
-.panel-left,
-.panel-right {
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .cont-header-action {
@@ -139,6 +144,14 @@ const cerrarSesion = () => {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.contenedor-body{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
 .content-albums {
   text-align: center;
   display: flex;
@@ -150,5 +163,33 @@ const cerrarSesion = () => {
 
 .content-albums .cont-lista {
   width: 100%;
+}
+
+@media (max-width: 1250px) {
+  .panel-left {
+    width: 40vw;
+    max-width: 320px;
+    min-width: 300px;
+  }
+
+  .panel-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .panel-left {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .panel-right {
+    width: 100%;
+  }
+
+  .container-home {
+    flex-wrap: wrap;
+  }
 }
 </style>

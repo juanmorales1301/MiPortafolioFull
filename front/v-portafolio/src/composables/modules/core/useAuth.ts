@@ -12,10 +12,9 @@ export function useAuth() {
   const login = async (credentials: { correoElectronico: string; contrasena: string }) => {
     try {
       const response = await httpPost('/auth/auth/autentificar', credentials);
-      console.log(response);
       
       if (response.token) {
-        sessionStore.login(response.token);
+        sessionStore.login(response.token, response.usuario);
         return { success: true, message: 'Autenticación exitosa' };
       } else {
         const modalId = abrirAlerta('Error de autenticación', response.mensaje || 'Error de autenticación', 'danger');

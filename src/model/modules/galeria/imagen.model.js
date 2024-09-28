@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 // Esquema para la tabla Imagen
 const imagenSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     album_id: {
         type: String,
         required: true,

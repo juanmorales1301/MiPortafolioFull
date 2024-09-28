@@ -3,7 +3,7 @@
         <div v-if="cargando" class="loading">Cargando galerías...</div>
         <div v-if="error" class="error">{{ error }}</div>
 
-        <div v-for="galeria in galerias" :key="galeria.id" class="cont-item" @click="seleccionarGaleria(galeria.id)">
+        <div v-for="galeria in galerias" :key="galeria._id" class="cont-item" @click="seleccionarGaleria(galeria._id)">
             <div class="item">
                 <div class="item-icon">
                     <i class="fa-solid fa-images"></i>
@@ -19,18 +19,21 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useGaleria } from '@/composables/modules/administracion/useGaleria';
-import type { Album } from '@/models/administracion/galeria.model';
+import type { albumModel } from '@/models/administracion/galeria.model';
+import { useAlbumStore } from '@/stores/galeria/albumStore';
 
-const galerias = ref<Album[]>([]);
+const galerias = ref<albumModel[]>([]);
 const cargando = ref(false);
 const error = ref<string | null>(null);
+const albumStore = useAlbumStore();
 
 // Función para obtener las galerías
 const { obtenerGalerias } = useGaleria();
 
 const emit = defineEmits(['galeriaSeleccionada']);
 
-onMounted(async () => {
+// Función para recargar las galerías
+const recargarGalerias = async () => {
     cargando.value = true;
     try {
         galerias.value = await obtenerGalerias();
@@ -40,11 +43,22 @@ onMounted(async () => {
         error.value = errorMsg;
         cargando.value = false;
     }
+};
+
+onMounted(async () => {
+    await recargarGalerias();
 });
 
-const seleccionarGaleria = (id: string) => {
-    emit('galeriaSeleccionada', id);
+const seleccionarGaleria = (id: string | undefined) => {
+    if (id) emit('galeriaSeleccionada', id);
 };
+
+// Escuchar el evento de recarga de álbumes
+albumStore.$onAction(({ name }) => {
+    if (name === 'cargarAlbums') {
+        recargarGalerias();
+    }
+});
 </script>
 
 <style scoped>

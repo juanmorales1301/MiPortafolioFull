@@ -44,12 +44,13 @@ const ControllerImagen = {
     getImagenById: async (req, res, next) => {
         try {
             const { id } = req.params;
+            if (['album'].includes(id)) return next();
 
             let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
-            const imagen = await Imagen.findById(id);
+            const imagen = await Imagen.findById({ _id: id });
             if (!imagen) {
-                return res.status(404).json({ mensaje: 'Imagen no encontrada' });
+                return res.status(202).json({ mensaje: 'Imagen no encontrada' });
             }
             return res.status(200).json(imagen);
         } catch (error) {
@@ -62,12 +63,12 @@ const ControllerImagen = {
     getImagenesByAlbumId: async (req, res, next) => {
         try {
             const { album_id } = req.params;
-
+            if(!(album_id && album_id != 0)) return res.status(202).json({ mensaje: 'No se encontraron imágenes para este álbum' });
             let con = await conexionModel.getConnection(); // Conecta a la instancia de BD
 
-            const imagenes = await Imagen.find({ album_id });
+            const imagenes = await Imagen.find({ album_id: album_id });
             if (!imagenes.length) {
-                return res.status(404).json({ mensaje: 'No se encontraron imágenes para este álbum' });
+                return res.status(202).json({ mensaje: 'No se encontraron imágenes para este álbum' });
             }
             return res.status(200).json(imagenes);
         } catch (error) {
@@ -92,7 +93,7 @@ const ControllerImagen = {
             );
 
             if (!imagenActualizada) {
-                return res.status(404).json({ mensaje: 'Imagen no encontrada' });
+                return res.status(202).json({ mensaje: 'Imagen no encontrada' });
             }
 
             return res.status(200).json({ mensaje: 'Imagen actualizada exitosamente', imagen: imagenActualizada });
@@ -112,7 +113,7 @@ const ControllerImagen = {
 
             const imagenEliminada = await Imagen.findByIdAndDelete(id);
             if (!imagenEliminada) {
-                return res.status(404).json({ mensaje: 'Imagen no encontrada' });
+                return res.status(202).json({ mensaje: 'Imagen no encontrada' });
             }
 
             return res.status(200).json({ mensaje: 'Imagen eliminada exitosamente' });

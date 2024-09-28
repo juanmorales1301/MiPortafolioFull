@@ -1,23 +1,27 @@
 <template>
     <div class="form-register">
         <div class="content-header">
-            <h3>Registrar Nuevo Álbum</h3>
+            <h3>Registrar Nueva Imagen</h3>
         </div>
 
         <div class="content-form">
             <FormGroup>
                 <GroupInput>
-                    <InputForm v-model="nombre" :error="errors.nombre">Nombre del Álbum</InputForm>
+                    <InputForm v-model="titulo" :error="errors.titulo">Título de la Imagen</InputForm>
                 </GroupInput>
                 <GroupInput>
-                    <InputForm v-model="descripcion" :error="errors.descripcion" type="textarea">Descripción del Álbum
+                    <InputForm v-model="descripcion" :error="errors.descripcion" type="textarea">
+                        Descripción de la Imagen
                     </InputForm>
+                </GroupInput>
+                <GroupInput>
+                    <InputForm v-model="url" :error="errors.url">URL de la Imagen</InputForm>
                 </GroupInput>
                 <GroupInput>
                     <SelectForm v-model="estado" :options="estadoOptions" label="Estado" :error="errors.estado" />
                 </GroupInput>
                 <GroupInput>
-                    <ButtonForm @click="eventoRegistroAlbum">Registrar Álbum</ButtonForm>
+                    <ButtonForm @click="eventoRegistroImagen">Registrar Imagen</ButtonForm>
                 </GroupInput>
             </FormGroup>
         </div>
@@ -28,9 +32,8 @@
 import { defineAsyncComponent, ref } from 'vue';
 import { useGaleria } from '@/composables/modules/administracion/useGaleria';
 import { useModal } from '@/composables/shared/useModal';
-import { useSessionStore } from '@/stores/core/auth';
+import type { imagenModel } from '@/models/administracion/galeria.model';
 import { useAlbumStore } from '@/stores/galeria/albumStore';
-import type { albumModel } from '@/models/administracion/galeria.model';
 
 // Lazy loading de los componentes
 const FormGroup = defineAsyncComponent(() => import('@/components/shared/forms/FormGroup.vue'));
@@ -39,37 +42,38 @@ const InputForm = defineAsyncComponent(() => import('@/components/shared/forms/I
 const SelectForm = defineAsyncComponent(() => import('@/components/shared/forms/SelectForm.vue'));
 const ButtonForm = defineAsyncComponent(() => import('@/components/shared/forms/ButtonForm.vue'));
 
-// Variables reactivas para capturar los datos del álbum
-const nombre = ref('');
+// Variables reactivas para capturar los datos de la imagen
+const titulo = ref('');
 const descripcion = ref('');
-const numeroImagenes = ref(1);
-const estado = ref('activo');
+const url = ref('');
+const estado = ref('visible');
 const { abrirAlerta } = useModal();
-const sessionStore = useSessionStore();
+const { crearImagen } = useGaleria();
 const albumStore = useAlbumStore();
 
 // Opciones para el campo de estado
 const estadoOptions = [
-    { label: 'Activo', value: 'activo' },
+    { label: 'Visible', value: 'visible' },
     { label: 'Eliminado', value: 'eliminado' }
 ];
 
 // Errores en los campos
 const errors = ref({
-    nombre: '',
+    titulo: '',
     descripcion: '',
-    numeroImagenes: '',
+    url: '',
     estado: ''
 });
 
-const { crearAlbum } = useGaleria();
+
+const props = defineProps<{ albumId: string }>()
 
 // Validar el formulario
 const validarFormulario = () => {
     errors.value = {
-        nombre: nombre.value ? '' : 'El nombre del álbum es obligatorio',
-        descripcion: descripcion.value ? '' : 'La descripción del álbum es obligatoria',
-        numeroImagenes: numeroImagenes.value && Number(numeroImagenes.value) >= 0 ? '' : 'El número de imágenes debe ser un valor positivo',
+        titulo: titulo.value ? '' : 'El título de la imagen es obligatorio',
+        descripcion: descripcion.value ? '' : 'La descripción de la imagen es obligatoria',
+        url: url.value ? '' : 'La URL de la imagen es obligatoria',
         estado: estado.value ? '' : 'El estado es obligatorio'
     };
 
@@ -77,7 +81,7 @@ const validarFormulario = () => {
 };
 
 // Función para manejar el envío del formulario
-const eventoRegistroAlbum = async () => {
+const eventoRegistroImagen = async () => {
     if (!validarFormulario()) {
         let objValid = JSON.parse(JSON.stringify(errors.value));
         for (let key in objValid) {
@@ -88,21 +92,20 @@ const eventoRegistroAlbum = async () => {
         return;
     }
 
-    const nuevoAlbum: albumModel = {
-        nombre: nombre.value,
+    const nuevaImagen: imagenModel = {
+        titulo: titulo.value,
         descripcion: descripcion.value,
-        usuario_id: sessionStore.usuario?._id,
-        numero_imagenes: Number(numeroImagenes.value),
-        estado: estado.value
+        url: url.value,
+        estado: estado.value,
+        album_id: props.albumId
     };
 
     try {
-        const response = await crearAlbum(nuevoAlbum);
-
+        const response = await crearImagen(nuevaImagen);
         if (response.success) {
-            await albumStore.cargarAlbums(); // Recargar álbumes desde el store
+            await albumStore.cargarImagenesAlbum(props.albumId);
         } else {
-            console.error('Error al crear el álbum:', response.message);
+            abrirAlerta('Error al crear imagen', response.message, 'warning');
         }
     } catch (error) {
         console.error('Error en la petición de registro', error);

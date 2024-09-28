@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 // Esquema para la tabla Log de Actividades
 const logActividadesSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true
-  },
   usuario_id: {
     type: String,
     required: true,

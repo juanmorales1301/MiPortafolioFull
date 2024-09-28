@@ -44,17 +44,25 @@ const router = express.Router();
  */
 router.post('/', authMid, ImagenControl.crearImagen);
 
+
 /**
  * @swagger
- * /imagen:
+ * /imagen/album/{album_id}:
  *   get:
- *     summary: Obtener todas las imágenes
+ *     summary: Obtener imágenes por ID de álbum
  *     tags: [Imágenes]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - name: album_id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID del álbum
  *     responses:
  *       200:
- *         description: Lista de imágenes
+ *         description: Imágenes encontradas para el álbum
  *         content:
  *           application/json:
  *             schema:
@@ -62,8 +70,6 @@ router.post('/', authMid, ImagenControl.crearImagen);
  *               items:
  *                 type: object
  *                 properties:
- *                   album_id:
- *                     type: string
  *                   url:
  *                     type: string
  *                   titulo:
@@ -72,10 +78,12 @@ router.post('/', authMid, ImagenControl.crearImagen);
  *                     type: string
  *                   estado:
  *                     type: string
+ *       404:
+ *         description: No se encontraron imágenes para este álbum
  *       500:
- *         description: Error al obtener las imágenes
+ *         description: Error al obtener las imágenes del álbum
  */
-router.get('/', authMid, ImagenControl.getImagenes);
+router.get('/album/:album_id', authMid, ImagenControl.getImagenesByAlbumId);
 
 /**
  * @swagger
@@ -117,45 +125,6 @@ router.get('/', authMid, ImagenControl.getImagenes);
  */
 router.get('/:id', authMid, ImagenControl.getImagenById);
 
-/**
- * @swagger
- * /imagen/album/{album_id}:
- *   get:
- *     summary: Obtener imágenes por ID de álbum
- *     tags: [Imágenes]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - name: album_id
- *         in: path
- *         required: true
- *         schema:
- *           type: string
- *         description: ID del álbum
- *     responses:
- *       200:
- *         description: Imágenes encontradas para el álbum
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   url:
- *                     type: string
- *                   titulo:
- *                     type: string
- *                   descripcion:
- *                     type: string
- *                   estado:
- *                     type: string
- *       404:
- *         description: No se encontraron imágenes para este álbum
- *       500:
- *         description: Error al obtener las imágenes del álbum
- */
-router.get('/album/:album_id', authMid, ImagenControl.getImagenesByAlbumId);
 
 /**
  * @swagger
@@ -220,4 +189,37 @@ router.put('/:id', authMid, ImagenControl.actualizarImagen);
  */
 router.delete('/:id', authMid, ImagenControl.eliminarImagen);
 
+
+/**
+ * @swagger
+ * /imagen:
+ *   get:
+ *     summary: Obtener todas las imágenes
+ *     tags: [Imágenes]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de imágenes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   album_id:
+ *                     type: string
+ *                   url:
+ *                     type: string
+ *                   titulo:
+ *                     type: string
+ *                   descripcion:
+ *                     type: string
+ *                   estado:
+ *                     type: string
+ *       500:
+ *         description: Error al obtener las imágenes
+ */
+router.get('/', authMid, ImagenControl.getImagenes);
 module.exports = router;

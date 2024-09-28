@@ -52,7 +52,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { defineAsyncComponent } from 'vue';
-import { useModal, type ModalData } from '@/composables/shared/useModal';
+import { useModal, type colorsModalHeader, type ModalData } from '@/composables/shared/useModal';
 
 // Cargar dinámicamente el componente ButtonForm solo si se necesita
 const ButtonForm = defineAsyncComponent(() =>
@@ -63,7 +63,7 @@ const { modals, cerrarModal, modalSizeClass } = useModal();
 
 // Estilo dinámico para el header dependiendo del tipo de alerta
 const headerClass = (modalData: ModalData) => {
-    const type = modalData.header?.type;
+    const type: colorsModalHeader | undefined = modalData.header?.type;
     switch (type) {
         case 'success':
             return 'modal-header-success';
@@ -109,7 +109,6 @@ const eventoOverlayClick = (id: number) => {
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    width: 50vw;
     max-height: 80vh;
     display: flex;
     flex-direction: column;

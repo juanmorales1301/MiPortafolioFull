@@ -1,11 +1,13 @@
 import type { ButtomColor, ButtomType } from '@/components/shared/forms/ButtonForm.vue';
 import { computed, ref, watch } from 'vue';
 
+export type colorsModalHeader = 'success' | 'danger' | 'warning';
+
 export interface ModalData {
     header?: {
         component?: any;
         textHtml?: string;
-        type?: string;
+        type?: colorsModalHeader;
         props?: any;
     };
     body?: {
@@ -76,23 +78,24 @@ export function useModal() {
         const size = modal?.data.size;
         switch (size) {
             case 'xs':
+                return { width: '100%', maxWidth: '350px', margin: '15px' };
             case 'sm':
-                return { width: 'calc(100% - 30px)', maxWidth: '340px', margin: '15px' };
+                return { width: '100%', maxWidth: '450px', margin: '15px' };
             case 'md':
-                return { width: '50vw', maxWidth: '600px' };
+                return { width: '100%', maxWidth: '600px', margin: '15px' };
             case 'lg':
-                return { width: '70vw', maxWidth: '900px' };
+                return { width: '100%', maxWidth: '900px', margin: '15px' };
             case 'xl':
-                return { width: '90vw', maxWidth: '1200px' };
+                return { width: '100%', maxWidth: '1200px', margin: '15px' };
             case 'xxl':
-                return { width: '100vw', maxWidth: '1400px' };
+                return { width: '100%', maxWidth: '1400px', margin: '15px' };
             default:
-                return { width: '50vw', maxWidth: '600px' };
+                return { width: '100%', maxWidth: '600px', margin: '15px' };
         }
     };
 
     // Abrir una alerta genérica
-    const abrirAlerta = (titulo: string, texto: any, type: string = 'success') => {
+    const abrirAlerta = (titulo: string, texto: any, type: colorsModalHeader = 'success') => {
         return abrirModal({
             header: {
                 textHtml: `<h2>${titulo}</h2>`,
@@ -107,7 +110,7 @@ export function useModal() {
                     { textHtml: 'Aceptar', color: 'success', action: 1, type: 'submit' }
                 ]
             },
-            size: 'xs'
+            size: 'sm'
         });
     };
 
@@ -123,7 +126,7 @@ export function useModal() {
             },
             footer: {},  // Sin footer
             bloquearCierre: bloquear,
-            size: 'xs'
+            size: 'sm'
         });
     };
 

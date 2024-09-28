@@ -21,13 +21,15 @@
 </template>
 
 <script setup lang="ts">
-import FormGroup from '@/components/shared/forms/FormGroup.vue';
-import GroupInput from '@/components/shared/forms/GroupInput.vue';
-import InputForm from '@/components/shared/forms/InputForm.vue';
-import ButtonForm from '@/components/shared/forms/ButtonForm.vue';
-import { ref } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 import { useAuth } from '@/composables/modules/core/useAuth';
 import { useRouter } from 'vue-router';
+
+// Lazy loading de los componentes
+const FormGroup = defineAsyncComponent(() => import('@/components/shared/forms/FormGroup.vue'));
+const GroupInput = defineAsyncComponent(() => import('@/components/shared/forms/GroupInput.vue'));
+const InputForm = defineAsyncComponent(() => import('@/components/shared/forms/InputForm.vue'));
+const ButtonForm = defineAsyncComponent(() => import('@/components/shared/forms/ButtonForm.vue'));
 
 const username = ref('');
 const password = ref('');
@@ -44,9 +46,7 @@ const eventoLogin = async () => {
 
     try {
         const response = await login(credentials);
-
         if (response.success) {
-            console.log('Autenticación exitosa');
             router.push({ name: 'home-galeria' });
         } else {
             console.error('Error al iniciar sesión:', response.message);
@@ -56,6 +56,7 @@ const eventoLogin = async () => {
     }
 };
 </script>
+
 
 
 <style scoped>

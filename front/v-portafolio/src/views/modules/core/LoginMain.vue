@@ -2,23 +2,41 @@
     <div class="cont-login">
         <div class="tarj-login">
             <div class="tabs">
-                <TabsButton :options="tabsOptions" :activeIndex="0" tabBackgroundColor="#f9f9f9" tabBorderColor="#ccc"
-                    tabTextColor="#333" tabActiveColor="#007bff" @click="handleTabClick" tabBorderTopLeftRadius="15px"
-                    tabBorderTopRightRadius="15px" tabBorderBottomLeftRadius="0" tabBorderBottomRightRadius="0" />
+                <Suspense>
+                    <template #default>
+                        <TabsButton :options="tabsOptions" :activeIndex="0" tabBackgroundColor="#f9f9f9"
+                            tabBorderColor="#ccc" tabTextColor="#333" tabActiveColor="#007bff" @click="handleTabClick"
+                            tabBorderTopLeftRadius="15px" tabBorderTopRightRadius="15px" tabBorderBottomLeftRadius="0"
+                            tabBorderBottomRightRadius="0" />
+                    </template>
+                    <template #fallback>
+                        <div>Loading tabs...</div>
+                    </template>
+                </Suspense>
             </div>
             <div class="cont-tarj">
-                <FormLogin v-if="activeTab == 0" />
-                <FormRegUsuario v-else-if="activeTab == 1" />
+                <Suspense>
+                    <template #default>
+                        <FormLogin v-if="activeTab == 0" />
+                        <FormRegUsuario v-else-if="activeTab == 1" />
+                    </template>
+                    <template #fallback>
+                        <div>Loading form...</div>
+                    </template>
+                </Suspense>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import FormLogin from '@/components/modules/admin/login/FormLogin.vue';
-import FormRegUsuario from '@/components/modules/admin/login/FormRegUsuario.vue';
-import TabsButton from '@/components/shared/components/TabsButton.vue';
 import { ref } from 'vue';
+import { defineAsyncComponent } from 'vue';
+
+// Cargar dinámicamente los componentes para lazy loading
+const FormLogin = defineAsyncComponent(() => import('@/components/modules/admin/login/FormLogin.vue'));
+const FormRegUsuario = defineAsyncComponent(() => import('@/components/modules/admin/login/FormRegUsuario.vue'));
+const TabsButton = defineAsyncComponent(() => import('@/components/shared/components/TabsButton.vue'));
 
 const tabsOptions = [
     { label: 'Iniciar Sesión' },

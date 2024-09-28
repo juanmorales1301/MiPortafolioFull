@@ -10,26 +10,26 @@ type FlexOptions = 'start-start' | 'start-center' | 'start-end' | 'center-start'
 
 // Definir la propiedad de entrada
 const props = defineProps({
-  flex: {
-    type: String as ()=> FlexOptions,
-    default: 'center-center'
-  }
+    flex: {
+        type: String as () => FlexOptions,
+        default: 'center-center'
+    }
 });
 
 // Computar clases basadas en la propiedad flex
 const flexClass = computed(() => {
-  const [justify, align] = props.flex.split('-');
-  return {
-    'justify-start': justify === 'start',
-    'justify-center': justify === 'center',
-    'justify-end': justify === 'end',
-    'justify-space-between': justify === 'space-between',
-    'justify-space-around': justify === 'space-around',
-    'align-start': align === 'start',
-    'align-center': align === 'center',
-    'align-end': align === 'end',
-    'align-stretch': align === 'stretch'
-  };
+    const [justify, align] = props.flex.split('-');
+    return {
+        'justify-start': justify === 'start',
+        'justify-center': justify === 'center',
+        'justify-end': justify === 'end',
+        'justify-space-between': justify === 'space-between',
+        'justify-space-around': justify === 'space-around',
+        'align-start': align === 'start',
+        'align-center': align === 'center',
+        'align-end': align === 'end',
+        'align-stretch': align === 'stretch'
+    };
 });
 </script>
 

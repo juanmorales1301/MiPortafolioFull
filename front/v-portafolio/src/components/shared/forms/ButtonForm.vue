@@ -29,7 +29,7 @@ const props = defineProps({
     },
     color: {
         type: String as () => Color,
-        default: 'primary',  // Estilo por defecto
+        default: 'primary',
     }
 });
 

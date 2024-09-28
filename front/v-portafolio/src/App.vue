@@ -2,12 +2,24 @@
   <main class="main-content">
     <RouterView />
   </main>
-  <ModalAction />
+  <Suspense>
+    <template #default>
+      <ModalAction />
+    </template>
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
+  </Suspense>
 </template>
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import ModalAction from './components/shared/components/ModalAction.vue';
+import { defineAsyncComponent } from 'vue';
+
+// Cargar ModalAction de manera asíncrona (lazy loading)
+const ModalAction = defineAsyncComponent(() =>
+  import('./components/shared/components/ModalAction.vue')
+);
 </script>
 
 <style scoped>

@@ -2,12 +2,26 @@
   <div class="container-home">
     <div class="panel-left">
       <div class="cont-header-action">
-        <ButtonForm>Agregar Album &nbsp;<i class="fa-solid fa-plus"></i> </ButtonForm>
+        <Suspense>
+          <template #default>
+            <ButtonForm>Agregar Album &nbsp;<i class="fa-solid fa-plus"></i></ButtonForm>
+          </template>
+          <template #fallback>
+            <div>Loading button...</div>
+          </template>
+        </Suspense>
         <h2>Albums</h2>
       </div>
       <div class="content-albums">
         <div class="cont-lista">
-          <MenuAlbum></MenuAlbum>
+          <Suspense>
+            <template #default>
+              <MenuAlbum></MenuAlbum>
+            </template>
+            <template #fallback>
+              <div>Loading albums...</div>
+            </template>
+          </Suspense>
         </div>
       </div>
     </div>
@@ -21,18 +35,28 @@
         </div>
       </div>
       <div class="contenedor-body">
-        <GaleriaDesing></GaleriaDesing>
+        <Suspense>
+          <template #default>
+            <GaleriaDesing></GaleriaDesing>
+          </template>
+          <template #fallback>
+            <div>Loading gallery...</div>
+          </template>
+        </Suspense>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import MenuAlbum from '@/components/modules/admin/galeria/MenuAlbum.vue';
-import ButtonForm from '@/components/shared/forms/ButtonForm.vue';
-import GaleriaDesing from '@/components/modules/admin/galeria/GaleriaDesing.vue';
+import { defineAsyncComponent } from 'vue';
 import { useSessionStore } from '@/stores/core/auth';
 import router from '@/router';
+
+// Lazy loading de los componentes
+const MenuAlbum = defineAsyncComponent(() => import('@/components/modules/admin/galeria/MenuAlbum.vue'));
+const ButtonForm = defineAsyncComponent(() => import('@/components/shared/forms/ButtonForm.vue'));
+const GaleriaDesing = defineAsyncComponent(() => import('@/components/modules/admin/galeria/GaleriaDesing.vue'));
 
 const sessionStore = useSessionStore();
 
@@ -40,9 +64,9 @@ const cerrarSesion = () => {
   sessionStore.logout();
   router.push({ name: 'login' });
   window.location.reload();
-}
-
+};
 </script>
+
 
 <style scoped>
 .container-home {

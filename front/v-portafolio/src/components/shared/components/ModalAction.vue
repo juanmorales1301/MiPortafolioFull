@@ -14,10 +14,18 @@
 
             <!-- Footer del modal con botones dinámicos -->
             <div v-if="modalData.footer" :class="footerClass">
-                <ButtonForm v-for="(button, index) in modalData.footer.buttons" :key="index" :color="button.color"
-                    :type="button.type || 'button'" @click="cerrarModal(button.action)" :class="button.class">
-                    <div v-html="button.textHtml"></div>
-                </ButtonForm>
+                <Suspense>
+                    <template #default>
+                        <ButtonForm v-for="(button, index) in modalData.footer.buttons" :key="index"
+                            :color="button.color" :type="button.type || 'button'" @click="cerrarModal(button.action)"
+                            :class="button.class">
+                            <div v-html="button.textHtml"></div>
+                        </ButtonForm>
+                    </template>
+                    <template #fallback>
+                        <div>Loading buttons...</div>
+                    </template>
+                </Suspense>
             </div>
         </div>
     </div>
@@ -26,9 +34,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useModal } from '@/composables/shared/useModal';
-import ButtonForm from '@/components/shared/forms/ButtonForm.vue';
+import { defineAsyncComponent } from 'vue';
 
-// Obtener los datos del modal y su visibilidad desde el composable
+// Cargar dinámicamente el componente ButtonForm solo si se necesita
+const ButtonForm = defineAsyncComponent(() =>
+    import('@/components/shared/forms/ButtonForm.vue')
+);
+
 const { modalData, visible, cerrarModal } = useModal();
 const bloquearCierre = computed(() => modalData.value.bloquearCierre);
 
@@ -47,7 +59,7 @@ const headerClass = computed(() => {
     }
 });
 
-// Estilo dinámico para el footer (si hay header o footer)
+// Estilo dinámico para el footer
 const footerClass = computed(() => {
     const hasHeader = !!modalData.value.header;
     return hasHeader ? 'modal-footer-rounded' : 'modal-footer';

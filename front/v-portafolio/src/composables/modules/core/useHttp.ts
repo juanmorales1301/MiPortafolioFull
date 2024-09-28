@@ -12,7 +12,7 @@ export function useHttp() {
   const apiPort = ref(import.meta.env.VITE_API_PORT);
 
   const buildUrl = (path: string) => {
-    return `${apiBaseUrl.value}:${apiPort.value}${subDom.value ? `/${subDom.value}` : ''}${path}`;
+    return `${apiBaseUrl.value}${apiPort.value && apiPort.value != '80' ? `:${apiPort.value}` : ''}${subDom.value ? `/${subDom.value}` : ''}${path}`;
   };
 
   const getHeaders = () => {

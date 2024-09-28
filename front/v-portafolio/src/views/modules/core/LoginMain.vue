@@ -10,7 +10,7 @@
                             tabBorderBottomRightRadius="0" />
                     </template>
                     <template #fallback>
-                        <div>Loading tabs...</div>
+                        <div>Cargando Tabs...</div>
                     </template>
                 </Suspense>
             </div>
@@ -21,7 +21,7 @@
                         <FormRegUsuario v-else-if="activeTab == 1" />
                     </template>
                     <template #fallback>
-                        <div>Loading form...</div>
+                        <div>Cargando formulario...</div>
                     </template>
                 </Suspense>
             </div>

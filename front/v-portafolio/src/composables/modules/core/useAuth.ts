@@ -2,6 +2,7 @@
 import { useHttp } from '@/composables/modules/core/useHttp';
 import { useSessionStore } from '@/stores/core/auth';
 import { useModal } from '@/composables/shared/useModal';
+
 const { abrirAlerta, escucharEvento } = useModal();
 
 export function useAuth() {
@@ -16,10 +17,11 @@ export function useAuth() {
         sessionStore.login(response.token);
         return { success: true, message: 'Autenticación exitosa' };
       } else {
+        const modalId = abrirAlerta('Error de autenticación', response.mensaje || 'Error de autenticación', 'danger');
         return { success: false, message: response.mensaje || 'Error de autenticación' };
       }
     } catch (error: any) {
-      abrirAlerta('Error al autenticar', error.message, 'danger');
+      const modalId = abrirAlerta('Error al autenticar', error.message, 'danger');
       return { success: false, message: error.message || 'Error en la autenticación' };
     }
   };
@@ -27,16 +29,6 @@ export function useAuth() {
   const logout = () => {
     sessionStore.logout(); // Limpiar la sesión
   };
-
-
-  // Escuchar los eventos de retorno del modal
-  escucharEvento((action) => {
-    if (action === 1) {
-      console.log('Confirmación aceptada');
-    } else if (action === 2) {
-      console.log('Operación cancelada');
-    }
-  });
 
   return {
     login,

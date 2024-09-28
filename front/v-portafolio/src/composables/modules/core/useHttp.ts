@@ -1,7 +1,7 @@
 import { useSessionStore } from '@/stores/core/auth';
 import { ref } from 'vue';
 import { useModal } from '@/composables/shared/useModal';
-const { cargando, cerrarModal } = useModal();
+const { abrirCargador, cerrarModal } = useModal();
 
 export function useHttp() {
   const sessionStore = useSessionStore();
@@ -28,7 +28,7 @@ export function useHttp() {
 
   // Método GET
   const httpGet = async (path: string) => {
-    cargando('Cargando...', true);
+    const idModal = abrirCargador('Cargando...', true);
     try {
       const url = buildUrl(path);
       const response = await fetch(url, { method: 'GET', headers: getHeaders() });
@@ -36,13 +36,13 @@ export function useHttp() {
       if (!response.ok) throw new Error('Error en la solicitud GET');
       return response.json();
     } finally {
-      cerrarModal(-1);
+      cerrarModal(idModal, -1);
     }
   };
 
   // Método POST
   const httpPost = async (path: string, data: any) => {
-    cargando('Cargando...', true);
+    const idModal = abrirCargador('Cargando...', true);
     try {
       const url = buildUrl(path);
       const response = await fetch(url, {
@@ -58,13 +58,13 @@ export function useHttp() {
 
       return response.json();
     } finally {
-      cerrarModal(-1);
+      cerrarModal(idModal, -1);
     }
   };
 
   // Método PUT
   const httpPut = async (path: string, data: any) => {
-    cargando('Cargando...', true);
+    const idModal = abrirCargador('Cargando...', true);
     try {
       const url = buildUrl(path);
       const response = await fetch(url, {
@@ -80,13 +80,13 @@ export function useHttp() {
 
       return response.json();
     } finally {
-      cerrarModal(-1);
+      cerrarModal(idModal, -1);
     }
   };
 
   // Método DELETE
   const httpDelete = async (path: string) => {
-    cargando('Cargando...', true);
+    const idModal = abrirCargador('Cargando...', true);
     try {
       const url = buildUrl(path);
       const response = await fetch(url, { method: 'DELETE', headers: getHeaders() });
@@ -94,7 +94,7 @@ export function useHttp() {
       if (!response.ok) throw new Error('Error en la solicitud DELETE');
       return response.json();
     } finally {
-      cerrarModal(-1);
+      cerrarModal(idModal, -1);
     }
   };
 

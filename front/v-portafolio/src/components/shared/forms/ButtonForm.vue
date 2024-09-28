@@ -12,15 +12,15 @@
 import { defineEmits, computed } from 'vue';
 
 // Define el tipo correcto para el botón
-type InputType = 'submit' | 'button' | 'reset' | undefined;
-type Color = 'primary' | 'success' | 'warning' | 'danger';
+export type ButtomType = 'submit' | 'button' | 'reset' | undefined;
+export type ButtomColor = 'primary' | 'success' | 'warning' | 'danger';
 
 const emit = defineEmits(['click']);
 
 // Define las propiedades del componente, incluyendo la propiedad block, type y color
 const props = defineProps({
     type: {
-        type: String as () => InputType,
+        type: String as () => ButtomType | undefined,
         default: 'button',
     },
     block: {
@@ -28,7 +28,7 @@ const props = defineProps({
         default: false,
     },
     color: {
-        type: String as () => Color,
+        type: String as () => ButtomColor | undefined,
         default: 'primary',
     }
 });

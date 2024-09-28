@@ -7,7 +7,7 @@
             <ButtonForm>Agregar Album &nbsp;<i class="fa-solid fa-plus"></i></ButtonForm>
           </template>
           <template #fallback>
-            <div>Loading button...</div>
+            <div>Cargando botón...</div>
           </template>
         </Suspense>
         <h2>Albums</h2>
@@ -19,7 +19,7 @@
               <MenuAlbum></MenuAlbum>
             </template>
             <template #fallback>
-              <div>Loading albums...</div>
+              <div>Cargando albums...</div>
             </template>
           </Suspense>
         </div>
@@ -40,7 +40,7 @@
             <GaleriaDesing></GaleriaDesing>
           </template>
           <template #fallback>
-            <div>Loading gallery...</div>
+            <div>Cargando galeria...</div>
           </template>
         </Suspense>
       </div>

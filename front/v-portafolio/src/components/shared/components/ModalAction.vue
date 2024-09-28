@@ -1,31 +1,49 @@
 <template>
-    <div v-if="visible" class="modal-overlay" @click="eventoOverlayClick">
-        <div class="modal-container" @click.stop>
-            <!-- Header del modal -->
-            <div v-if="modalData.header" :class="['modal-header', headerClass]">
-                <div v-html="modalData.header.textHtml" class="cont-header"></div>
-                <div v-if="!bloquearCierre" class="cont-btn-close" @click="cerrarModal(0)">
-                    <button class="close-button">X</button>
+    <div v-for="modal in modals" :key="modal.id">
+        <div v-if="modal.visible" class="modal-overlay" @click="eventoOverlayClick(modal.id)">
+            <div class="modal-container" :style="modalSizeClass(modal.id)" @click.stop>
+                <!-- Header del modal -->
+                <div v-if="modal.data.header" :class="['modal-header', headerClass(modal.data)]">
+                    <div v-if="modal.data.header.component">
+                        <!-- Renderiza el componente del header si se proporciona -->
+                        <component :is="modal.data.header.component" v-bind="modal.data.header.props" />
+                    </div>
+                    <div v-else v-html="modal.data.header.textHtml" class="cont-header"></div>
+                    <div v-if="!modal.data.bloquearCierre" class="cont-btn-close" @click="cerrarModal(modal.id, 0)">
+                        <button class="close-button">X</button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Cuerpo del modal -->
-            <div class="modal-body" v-html="modalData.body?.textHtml"></div>
+                <!-- Cuerpo del modal -->
+                <div class="modal-body" v-if="modal.data.body">
+                    <div v-if="modal.data.body.component">
+                        <!-- Renderiza el componente del body si se proporciona -->
+                        <component :is="modal.data.body.component" v-bind="modal.data.body.props" />
+                    </div>
+                    <div v-else v-html="modal.data.body?.textHtml"></div>
+                </div>
 
-            <!-- Footer del modal con botones dinámicos -->
-            <div v-if="modalData.footer" :class="footerClass">
-                <Suspense>
-                    <template #default>
-                        <ButtonForm v-for="(button, index) in modalData.footer.buttons" :key="index"
-                            :color="button.color" :type="button.type || 'button'" @click="cerrarModal(button.action)"
-                            :class="button.class">
-                            <div v-html="button.textHtml"></div>
-                        </ButtonForm>
-                    </template>
-                    <template #fallback>
-                        <div>Loading buttons...</div>
-                    </template>
-                </Suspense>
+                <!-- Footer del modal -->
+                <div v-if="modal.data.footer" :class="footerClass(modal.data)">
+                    <div v-if="modal.data.footer.component">
+                        <!-- Renderiza el componente del footer si se proporciona -->
+                        <component :is="modal.data.footer.component" v-bind="modal.data.footer.props" />
+                    </div>
+                    <div v-else class="btns-footer-modal">
+                        <Suspense>
+                            <template #default>
+                                <ButtonForm v-for="(button, index) in modal.data.footer.buttons" :key="index"
+                                    :color="button.color" :type="button.type || 'button'"
+                                    @click="cerrarModal(modal.id, button.action)" :class="button.class">
+                                    <div v-html="button.textHtml"></div>
+                                </ButtonForm>
+                            </template>
+                            <template #fallback>
+                                <div>Cargando botones...</div>
+                            </template>
+                        </Suspense>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -33,20 +51,19 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useModal } from '@/composables/shared/useModal';
 import { defineAsyncComponent } from 'vue';
+import { useModal, type ModalData } from '@/composables/shared/useModal';
 
 // Cargar dinámicamente el componente ButtonForm solo si se necesita
 const ButtonForm = defineAsyncComponent(() =>
     import('@/components/shared/forms/ButtonForm.vue')
 );
 
-const { modalData, visible, cerrarModal } = useModal();
-const bloquearCierre = computed(() => modalData.value.bloquearCierre);
+const { modals, cerrarModal, modalSizeClass } = useModal();
 
 // Estilo dinámico para el header dependiendo del tipo de alerta
-const headerClass = computed(() => {
-    const type = modalData.value.header?.type;
+const headerClass = (modalData: ModalData) => {
+    const type = modalData.header?.type;
     switch (type) {
         case 'success':
             return 'modal-header-success';
@@ -57,18 +74,19 @@ const headerClass = computed(() => {
         default:
             return '';
     }
-});
+};
 
 // Estilo dinámico para el footer
-const footerClass = computed(() => {
-    const hasHeader = !!modalData.value.header;
+const footerClass = (modalData: ModalData) => {
+    const hasHeader = !!modalData.header;
     return hasHeader ? 'modal-footer-rounded' : 'modal-footer';
-});
+};
 
 // Cerrar el modal solo si no está bloqueado
-const eventoOverlayClick = () => {
-    if (!bloquearCierre.value) {
-        cerrarModal(-1);
+const eventoOverlayClick = (id: number) => {
+    const modal = modals.value.find(modal => modal.id === id);
+    if (modal && !modal.data.bloquearCierre) {
+        cerrarModal(id, -1);
     }
 };
 </script>
@@ -80,7 +98,7 @@ const eventoOverlayClick = () => {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.45);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,10 +161,14 @@ const eventoOverlayClick = () => {
 }
 
 .modal-footer,
-.modal-footer-rounded {
+.modal-footer-rounded,
+.btns-footer-modal {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+}
+
+.btns-footer-modal {
     gap: 15px;
     align-items: center;
     justify-content: center;

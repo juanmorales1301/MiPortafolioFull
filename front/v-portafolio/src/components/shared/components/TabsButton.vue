@@ -105,7 +105,7 @@
       cursor: 'pointer',
       backgroundColor: activeTab.value === index ? props.tabActiveColor : props.tabBackgroundColor,
       color: activeTab.value === index ? '#fff' : props.tabTextColor,
-      borderBottom: activeTab.value === index ? `3px solid ${props.tabActiveColor}` : 'none',
+      borderBottom: activeTab.value === index ? `1px solid ${props.tabActiveColor}` : `1px solid ${props.tabBackgroundColor}`,
       transition: 'all 0.3s ease',
       ...borderRadiusStyle, // Incluir el estilo de border-radius personalizado
     };

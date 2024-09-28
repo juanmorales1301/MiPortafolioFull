@@ -1,6 +1,8 @@
 // src/composables/useHttp.ts
 import { useSessionStore } from '@/stores/core/auth';
 import { ref } from 'vue';
+import { useModal } from '@/composables/shared/useModal';
+const { cargando, cerrarModal } = useModal();
 
 export function useHttp() {
   const sessionStore = useSessionStore();
@@ -26,27 +28,37 @@ export function useHttp() {
   };
 
   const httpGet = async (path: string) => {
-    const url = buildUrl(path);
-    const response = await fetch(url, { method: 'GET', headers: getHeaders() });
+    cargando('Cargando...', true);
+    try {
+      const url = buildUrl(path);
+      const response = await fetch(url, { method: 'GET', headers: getHeaders() });
 
-    if (!response.ok) throw new Error('Error en la solicitud GET');
-    return response.json();
+      if (!response.ok) throw new Error('Error en la solicitud GET');
+      return response.json();
+    } finally {
+      cerrarModal(-1);
+    }
   };
 
   const httpPost = async (path: string, data: any) => {
-    const url = buildUrl(path);
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify(data),
-    });
+    cargando('Cargando...', true);
+    try {
+      const url = buildUrl(path);
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(data),
+      });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.mensaje || 'Error en la solicitud POST');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.mensaje || 'Error en la solicitud POST');
+      }
+
+      return response.json();
+    } finally {
+      cerrarModal(-1);
     }
-
-    return response.json();
   };
 
   return {

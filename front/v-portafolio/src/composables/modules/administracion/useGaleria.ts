@@ -37,7 +37,7 @@ export function useGaleria() {
     const obtenerImagenes = async (albumId: string): Promise<Imagen[]> => {
         cargando.value = true;
         try {
-            const response = await httpGet(`/galeria/imagenes?albumId=${albumId}`);
+            const response = await httpGet(`/galeria/imagen?albumId=${albumId}`);
             if (response && response.length) {
                 images.value = response as Imagen[];
             } else {

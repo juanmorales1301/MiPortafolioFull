@@ -21,7 +21,7 @@ export function useHttp() {
     };
 
     if (sessionStore.isLoggedIn && sessionStore.token) {
-      headers['Authorization'] = `Bearer ${sessionStore.token}`;
+      headers['x-auth-token'] = `Bearer ${sessionStore.token}`;
     }
 
     return headers;

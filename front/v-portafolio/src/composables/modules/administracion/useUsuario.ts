@@ -19,7 +19,7 @@ export function useUsuario() {
       const response = await httpPost('/admin/usuario', usuarioData);
 
       if (response) {
-        abrirAlerta('Usuario creado exitosamente', 'El usuario ha sido creado con exito, te invito a entran a la seccion de Acceso a la plataforma para ingresar', 'success');
+        abrirAlerta('Usuario creado exitosamente', 'El usuario ha sido creado con éxito. Te invitamos ir a la sección de Acceso a la plataforma para iniciar sesión.', 'success');
         return { success: true, message: 'Usuario creado exitosamente' };
       } else {
         abrirAlerta('Error al crear usuario', response.mensaje || response?.mensaje, 'warning');

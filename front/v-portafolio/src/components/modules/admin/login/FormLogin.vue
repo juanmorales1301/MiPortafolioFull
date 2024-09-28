@@ -27,35 +27,33 @@ import InputForm from '@/components/shared/forms/InputForm.vue';
 import ButtonForm from '@/components/shared/forms/ButtonForm.vue';
 import { ref } from 'vue';
 import { useAuth } from '@/composables/modules/core/useAuth';
+import { useRouter } from 'vue-router';
 
-
-// Variables reactivas para capturar los datos
 const username = ref('');
 const password = ref('');
 
 const { login } = useAuth();
+const router = useRouter();
 
 // Función para manejar el envío del formulario
 const eventoLogin = async () => {
-  const credentials = {
-    correoElectronico: username.value,
-    contrasena: password.value,
-  };
+    const credentials = {
+        correoElectronico: username.value,
+        contrasena: password.value,
+    };
 
-  try {
-    // Llamar a la función de login y manejar la respuesta
-    const response = await login(credentials);
+    try {
+        const response = await login(credentials);
 
-  if (response.success) {
-    console.log('Autenticación exitosa');
-    // Redirigir al usuario o realizar otras acciones
-  } else {
-    console.error('Error al iniciar sesión:', response.message);
-    // Mostrar el error al usuario
-  }
-  } catch (error) {
-    console.error('Error en la petición de login', error);
-  }
+        if (response.success) {
+            console.log('Autenticación exitosa');
+            router.push({ name: 'home-galeria' });
+        } else {
+            console.error('Error al iniciar sesión:', response.message);
+        }
+    } catch (error) {
+        console.error('Error en la petición de login', error);
+    }
 };
 </script>
 

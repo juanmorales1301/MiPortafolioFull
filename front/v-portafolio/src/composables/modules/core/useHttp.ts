@@ -1,4 +1,3 @@
-// src/composables/useHttp.ts
 import { useSessionStore } from '@/stores/core/auth';
 import { ref } from 'vue';
 import { useModal } from '@/composables/shared/useModal';
@@ -12,7 +11,7 @@ export function useHttp() {
   const apiPort = ref(import.meta.env.VITE_API_PORT);
 
   const buildUrl = (path: string) => {
-    return `${apiBaseUrl.value}${apiPort.value && apiPort.value != '80' ? `:${apiPort.value}` : ''}${subDom.value ? `/${subDom.value}` : ''}${path}`;
+    return `${apiBaseUrl.value}${apiPort.value && apiPort.value !== '80' ? `:${apiPort.value}` : ''}${subDom.value ? `/${subDom.value}` : ''}${path}`;
   };
 
   const getHeaders = () => {
@@ -27,6 +26,7 @@ export function useHttp() {
     return headers;
   };
 
+  // Método GET
   const httpGet = async (path: string) => {
     cargando('Cargando...', true);
     try {
@@ -40,6 +40,7 @@ export function useHttp() {
     }
   };
 
+  // Método POST
   const httpPost = async (path: string, data: any) => {
     cargando('Cargando...', true);
     try {
@@ -61,8 +62,46 @@ export function useHttp() {
     }
   };
 
+  // Método PUT
+  const httpPut = async (path: string, data: any) => {
+    cargando('Cargando...', true);
+    try {
+      const url = buildUrl(path);
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: getHeaders(),
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.mensaje || 'Error en la solicitud PUT');
+      }
+
+      return response.json();
+    } finally {
+      cerrarModal(-1);
+    }
+  };
+
+  // Método DELETE
+  const httpDelete = async (path: string) => {
+    cargando('Cargando...', true);
+    try {
+      const url = buildUrl(path);
+      const response = await fetch(url, { method: 'DELETE', headers: getHeaders() });
+
+      if (!response.ok) throw new Error('Error en la solicitud DELETE');
+      return response.json();
+    } finally {
+      cerrarModal(-1);
+    }
+  };
+
   return {
     httpGet,
     httpPost,
+    httpPut,
+    httpDelete,
   };
 }

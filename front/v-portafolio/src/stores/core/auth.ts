@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 export const useSessionStore = defineStore('session', {
   state: () => ({
     isLoggedIn: false,
+    id_usuario: 0,
     token: null as string | null,
   }),
   actions: {

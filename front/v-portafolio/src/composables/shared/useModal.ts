@@ -92,7 +92,7 @@ export function useModal() {
     };
 
     // Abrir una alerta genérica
-    const abrirAlerta = (titulo: string, texto: string, type: string = 'success') => {
+    const abrirAlerta = (titulo: string, texto: any, type: string = 'success') => {
         return abrirModal({
             header: {
                 textHtml: `<h2>${titulo}</h2>`,

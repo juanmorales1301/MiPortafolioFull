@@ -30,7 +30,8 @@ const ControllerLog = {
                 { expiresIn: '1h' } // El token expirará en 1 hora
             );
 
-            return res.status(200).json({ mensaje: 'Autenticación exitosa', token });
+            delete usuario.contrasena;
+            return res.status(200).json({ mensaje: 'Autenticación exitosa', token, usuario });
         } catch (error) {
             console.log(error);
             return res.status(500).json({ mensaje: 'Error al autenticar el usuario', error });

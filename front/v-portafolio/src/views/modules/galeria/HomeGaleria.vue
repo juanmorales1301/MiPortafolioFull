@@ -4,10 +4,10 @@
       <div class="cont-header-action">
         <Suspense>
           <template #default>
-            <ButtonForm>Agregar Album &nbsp;<i class="fa-solid fa-plus"></i></ButtonForm>
+            <AlbumAction></AlbumAction>
           </template>
           <template #fallback>
-            <div>Cargando botón...</div>
+            <div>Cargando acciones...</div>
           </template>
         </Suspense>
         <h2>Albums</h2>
@@ -55,7 +55,7 @@ import router from '@/router';
 
 // Lazy loading de los componentes
 const MenuAlbum = defineAsyncComponent(() => import('@/components/modules/admin/galeria/MenuAlbum.vue'));
-const ButtonForm = defineAsyncComponent(() => import('@/components/shared/forms/ButtonForm.vue'));
+const AlbumAction = defineAsyncComponent(() => import('@/components/modules/admin/galeria/AlbumAction.vue'));
 const GaleriaDesing = defineAsyncComponent(() => import('@/components/modules/admin/galeria/GaleriaDesing.vue'));
 
 const sessionStore = useSessionStore();

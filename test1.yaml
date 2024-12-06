@@ -1,0 +1,9 @@
+# CI/CD pipeline para construir, probar y desplegar una aplicación web
+image: node:20  # Usar una imagen de Node.js para construir una app
+stages: #Define la imagen base o runner donde se ejecutará el pipeline.
+  - build
+  - test
+  - deploy
+variables:
+  NODE_ENV: production
+  API_URL: https://api.example.com
